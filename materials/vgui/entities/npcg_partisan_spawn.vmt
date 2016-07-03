@@ -1,0 +1,10 @@
+
+UnlitGeneric
+{ 
+
+	$basetexture		vgui/entities/npcg_partisan
+	$vertexcolor 		1 
+	$vertexalpha 		1 
+	$nolod 				1
+
+} 

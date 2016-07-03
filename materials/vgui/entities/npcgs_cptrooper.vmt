@@ -1,0 +1,10 @@
+
+UnlitGeneric
+{ 
+
+	$basetexture		vgui/entities/npcgs_cptrooper
+	$vertexcolor 		1 
+	$vertexalpha 		1 
+	$nolod 				1
+
+} 
