@@ -21,7 +21,11 @@ if SERVER then
 		
 		self.ent1 = ents.Create("npc_strider")
 		self.ent1:SetPos(self:GetPos() + self:GetForward() * -300)
-		self.ent1:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent1:SetAngles( Angle( 0 , 0 , 0 ) )
+		else
+			self.ent1:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		end
 		self.ent1:SetKeyValue( "spawnflags", tostring( self.kvNum + self.longNum + self.pushNum + self.fadeNum + 65536 ) )
 		self.ent1:SetKeyValue( "wakeradius", GetConVarNumber( "npcg_wakeradius_synth" ) )
 		self.ent1:Spawn()
@@ -31,7 +35,11 @@ if SERVER then
 		if IsMounted( "ep2" ) then
 			self.ent2 = ents.Create("npc_hunter")
 			self.ent2:SetPos(self:GetPos() + self:GetRight() * -150)
+			if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent2:SetAngles( Angle( 0 , 0 , 0 ) )
+		else
 			self.ent2:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		end
 			self.ent2:SetHealth( GetConVarNumber("npcg_healthoverride_hunter") )
 			self.ent2:SetKeyValue( "wakeradius", GetConVarNumber( "npcg_wakeradius_hunter" ) )
 			self.ent2:SetKeyValue( "spawnflags", tostring( self.kvNum + self.longNum + self.pushNum + self.fadeNum ) )
@@ -41,7 +49,11 @@ if SERVER then
 			
 			self.ent3 = ents.Create("npc_hunter")
 			self.ent3:SetPos(self:GetPos() + self:GetRight() * 150)
+			if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent3:SetAngles( Angle( 0 , 0 , 0 ) )
+		else
 			self.ent3:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		end
 			self.ent3:SetHealth( GetConVarNumber("npcg_healthoverride_hunter") )
 			self.ent3:SetKeyValue( "wakeradius", GetConVarNumber( "npcg_wakeradius_hunter" ) )
 			self.ent3:SetKeyValue( "spawnflags", tostring( self.kvNum + self.longNum + self.pushNum + self.fadeNum ) )
@@ -53,7 +65,11 @@ if SERVER then
 		if !ConVarExists( "npcg_clawscanner_striderscout" ) then CreateConVar(	"npcg_clawscanner_striderscout",	"1",		{	FCVAR_REPLICATED, FCVAR_ARCHIVE }	) end
 		self.ent4 = ents.Create("npc_clawscanner")
 		self.ent4:SetPos(self:GetPos() + self:GetForward() * 100 + self:GetUp() * 50 )
-		self.ent4:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent4:SetAngles( Angle( 0 , 0 , 0 ) )
+		else
+			self.ent4:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		end
 		self.ent4:SetHealth( GetConVarNumber("npcg_healthoverride_scanner") )
 		self.ent4:SetKeyValue( "wakeradius", GetConVarNumber( "npcg_wakeradius_scanner" ) )
 		self.ent4:SetKeyValue( "spawnflags", tostring( self.kvNum + self.longNum + self.pushNum + self.fadeNum + self.striderScoutNum ) )
@@ -62,17 +78,17 @@ if SERVER then
 		self.ent4:SetSchedule( SCHED_IDLE_WANDER )
 
 		if GetConVarNumber( "npcg_squad_combine" ) != 0	then
-			self.ent1:SetKeyValue( "SquadName", "CombineSquad" )
-			self.ent2:SetKeyValue( "SquadName", "CombineSquad" )
-			self.ent3:SetKeyValue( "SquadName", "CombineSquad" )
-			self.ent4:SetKeyValue( "SquadName", "CombineSquad" )
+			self.ent1:SetKeyValue( "SquadName", "Combine" )
+			self.ent2:SetKeyValue( "SquadName", "Combine" )
+			self.ent3:SetKeyValue( "SquadName", "Combine" )
+			self.ent4:SetKeyValue( "SquadName", "Combine" )
 		end
 		
 		if GetConVarNumber( "npcg_squad_wakeupall" ) != 0	then	
-			self.ent1:SetKeyValue( "wakesquad", 1 )	
-			self.ent2:SetKeyValue( "wakesquad", 1 )	
-			self.ent3:SetKeyValue( "wakesquad", 1 )	
-			self.ent4:SetKeyValue( "wakesquad", 1 )	
+			self.ent1:SetKeyValue( "wakesquad", 1 ) 
+			self.ent2:SetKeyValue( "wakesquad", 1 ) 
+			self.ent3:SetKeyValue( "wakesquad", 1 ) 
+			self.ent4:SetKeyValue( "wakesquad", 1 ) 
 		end
 		
 		if	GetConVarNumber("npcg_accuracy_synth") >= 4	then
@@ -96,10 +112,10 @@ if SERVER then
 			self.ent3:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_AVERAGE)
 			self.ent4:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_AVERAGE)
 		else
-			self.ent1:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_POOR)	
+			self.ent1:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_POOR) 
 			self.ent2:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_POOR)
 			self.ent3:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_POOR)
-			self.ent4:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_POOR)	
+			self.ent4:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_POOR) 
 		end
 
 		timer.Simple(0, function()

@@ -30,7 +30,11 @@ if SERVER then
 		
 		self.ent1 = ents.Create("npc_combine_s")
 		self.ent1:SetPos(self:GetPos())
-		self.ent1:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent1:SetAngles( Angle( 0 , 0 , 0 ) )
+		else
+			self.ent1:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		end
 		self.ent1:SetModel("models/combine_soldier_prisonguard.mdl" )
 		self.ent1:SetSkin(1)
 		self.ent1:SetKeyValue( "additionalequipment", "weapon_shotgun" )
@@ -42,15 +46,15 @@ if SERVER then
 		self.ent1:SetSchedule( SCHED_IDLE_WANDER )
 
 		if GetConVarNumber( "npcg_squad_combine" ) != 0	then
-			self.ent1:SetKeyValue( "SquadName", "CombineSquad" )
+			self.ent1:SetKeyValue( "SquadName", "Combine" )
 		end
 		
 		if GetConVarNumber( "npcg_squad_combine" ) != 0	then
-			self.ent1:SetKeyValue( "SquadName", "CombineSquad" )
+			self.ent1:SetKeyValue( "SquadName", "Combine" )
 		end
 		
 		if GetConVarNumber( "npcg_squad_wakeupall" ) != 0	then	
-			self.ent1:SetKeyValue( "wakesquad", 1 )	
+			self.ent1:SetKeyValue( "wakesquad", 1 ) 
 		end
 
 		if	GetConVarNumber("npcg_combine_tacticalvar") > 1	then
@@ -70,7 +74,7 @@ if SERVER then
 		elseif	GetConVarNumber("npcg_accuracy_combine") == 1	then
 			self.ent1:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_AVERAGE)
 		else
-			self.ent1:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_POOR)	
+			self.ent1:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_POOR) 
 		end
 
 		timer.Simple(0, function()

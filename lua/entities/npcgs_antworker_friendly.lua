@@ -38,7 +38,11 @@ if SERVER then
 		if IsMounted( "ep2" ) then
 			self.ent1 = ents.Create("npc_antlion_worker")
 			self.ent1:SetPos(self:GetPos())
+			if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent1:SetAngles( Angle( 0 , 0 , 0 ) )
+		else
 			self.ent1:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		end
 			self.ent1:SetKeyValue( "spawnflags", tostring( self.kvNum + self.longNum + self.pushNum + self.fadeNum + self.eludeBurrowNum ) )
 			self.ent1:SetKeyValue( "startburrowed", tostring( self.startBurrow )  )
 			self.ent1:SetKeyValue( "wakeradius", tostring( self.wakeRadius ) )
@@ -49,7 +53,11 @@ if SERVER then
 		else
 			self.ent1 = ents.Create("npc_antlion")
 			self.ent1:SetPos(self:GetPos())
+			if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent1:SetAngles( Angle( 0 , 0 , 0 ) )
+		else
 			self.ent1:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		end
 			self.ent1:SetSkin( math.random( 0, 3 ) )
 			self.ent1:SetKeyValue( "spawnflags", tostring( self.kvNum + self.longNum + self.pushNum + self.fadeNum + self.eludeBurrowNum ) )
 			self.ent1:SetKeyValue( "startburrowed", tostring( self.startBurrow )  )
@@ -61,11 +69,11 @@ if SERVER then
 		end
 
 		if GetConVarNumber( "npcg_squad_antlion" ) != 0	then
-			self.ent1:SetKeyValue( "SquadName", "AntlionSquad" )
+			self.ent1:SetKeyValue( "SquadName", "Antlion" )
 		end
 
 		if GetConVarNumber( "npcg_squad_wakeupall" ) != 0	then	
-			self.ent1:SetKeyValue( "wakesquad", 1 )	
+			self.ent1:SetKeyValue( "wakesquad", 1 ) 
 		end
 
 		self.ent1:AddRelationship("player D_LI 200")

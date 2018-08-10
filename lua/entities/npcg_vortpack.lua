@@ -23,7 +23,11 @@ if SERVER then
 		
 		self.ent1 = ents.Create("npc_vortigaunt")
 		self.ent1:SetPos(self:GetPos() + self:GetRight() * -50)
-		self.ent1:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent1:SetAngles( Angle( 0 , 0 , 0 ) )
+		else
+			self.ent1:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		end
 		self.ent1:SetKeyValue( "wakeradius", GetConVarNumber( "npcg_wakeradius_vort" ) )
 		self.ent1:SetKeyValue( "spawnflags", tostring( self.kvNum + self.longNum + self.pushNum + self.fadeNum ) )
 		self.ent1:Spawn()
@@ -32,7 +36,11 @@ if SERVER then
 		
 		self.ent2 = ents.Create("npc_vortigaunt")
 		self.ent2:SetPos(self:GetPos() + self:GetForward() * 50)
-		self.ent2:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent2:SetAngles( Angle( 0 , 0 , 0 ) )
+		else
+			self.ent2:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		end
 		self.ent2:SetKeyValue( "wakeradius", GetConVarNumber( "npcg_wakeradius_vort" ) )
 		self.ent2:SetKeyValue( "spawnflags", tostring( self.kvNum + self.longNum + self.pushNum + self.fadeNum ) )
 		self.ent2:Spawn()
@@ -40,7 +48,11 @@ if SERVER then
 		self.ent2:SetSchedule( SCHED_IDLE_WANDER )
 		self.ent3 = ents.Create("npc_vortigaunt")
 		self.ent3:SetPos(self:GetPos() + self:GetRight() * 50)
-		self.ent3:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent3:SetAngles( Angle( 0 , 0 , 0 ) )
+		else
+			self.ent3:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		end
 		self.ent3:SetKeyValue( "wakeradius", GetConVarNumber( "npcg_wakeradius_vort" ) )
 		self.ent3:SetKeyValue( "spawnflags", tostring( self.kvNum + self.longNum + self.pushNum + self.fadeNum ) )
 		self.ent3:Spawn()
@@ -53,14 +65,14 @@ if SERVER then
 			self.ent3:SetKeyValue( "SquadName", "VortSquad" )
 		end
 		if GetConVarNumber( "npcg_squad_wakeupall" ) != 0	then	
-			self.ent1:SetKeyValue( "wakesquad", 1 )	
-			self.ent2:SetKeyValue( "wakesquad", 1 )	
-			self.ent3:SetKeyValue( "wakesquad", 1 )	
+			self.ent1:SetKeyValue( "wakesquad", 1 ) 
+			self.ent2:SetKeyValue( "wakesquad", 1 ) 
+			self.ent3:SetKeyValue( "wakesquad", 1 ) 
 		end
 		if GetConVarNumber( "npcg_regenhealth_vort" ) != 0	then	
-			self.ent1:SetKeyValue( "HealthRegenerateEnabled", 1 )	
-			self.ent2:SetKeyValue( "HealthRegenerateEnabled", 1 )	
-			self.ent3:SetKeyValue( "HealthRegenerateEnabled", 1 )	
+			self.ent1:SetKeyValue( "HealthRegenerateEnabled", 1 ) 
+			self.ent2:SetKeyValue( "HealthRegenerateEnabled", 1 ) 
+			self.ent3:SetKeyValue( "HealthRegenerateEnabled", 1 ) 
 		end
 		if	GetConVarNumber("npcg_accuracy_vortigaunt") >= 4	then
 			self.ent1:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_PERFECT)
@@ -81,7 +93,7 @@ if SERVER then
 		else
 			self.ent1:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_POOR)
 			self.ent2:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_POOR)
-			self.ent3:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_POOR)	
+			self.ent3:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_POOR) 
 		end
 		
 		timer.Simple(0, function()

@@ -21,7 +21,11 @@ if SERVER then
 		
 		self.ent1 = ents.Create("npc_Crow")
 		self.ent1:SetPos(self:GetPos() + self:GetUp() * 50 )
-		self.ent1:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent1:SetAngles( Angle( 0 , 0 , 0 ) )
+		else
+			self.ent1:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		end
 		self.ent1:SetKeyValue( "spawnflags", tostring( self.kvNum + self.longNum + self.pushNum + self.fadeNum ) )
 		self.ent1:Spawn()
 		self.ent1:Activate()
@@ -29,7 +33,11 @@ if SERVER then
 
 		self.ent2 = ents.Create("npc_Crow")
 		self.ent2:SetPos(self:GetPos() + self:GetForward() * 50 + self:GetRight() * 50 + self:GetUp() * 50 )
-		self.ent2:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent2:SetAngles( Angle( 0 , 0 , 0 ) )
+		else
+			self.ent2:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		end
 		self.ent2:SetKeyValue( "spawnflags", tostring( self.kvNum + self.longNum + self.pushNum + self.fadeNum ) )
 		self.ent2:Spawn()
 		self.ent2:Activate()
@@ -37,7 +45,11 @@ if SERVER then
 
 		self.ent3 = ents.Create("npc_Crow")
 		self.ent3:SetPos(self:GetPos() + self:GetForward() * 50 + self:GetRight() * -50 + self:GetUp() * 50 )
-		self.ent3:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent3:SetAngles( Angle( 0 , 0 , 0 ) )
+		else
+			self.ent3:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		end
 		self.ent3:SetKeyValue( "spawnflags", tostring( self.kvNum + self.longNum + self.pushNum + self.fadeNum ) )
 		self.ent3:Spawn()
 		self.ent3:Activate()
@@ -45,7 +57,11 @@ if SERVER then
 
 		self.ent4 = ents.Create("npc_Crow")
 		self.ent4:SetPos(self:GetPos() + self:GetForward() * 50 + self:GetRight() * 0 + self:GetUp() * 50 )
-		self.ent4:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent4:SetAngles( Angle( 0 , 0 , 0 ) )
+		else
+			self.ent4:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		end
 		self.ent4:SetKeyValue( "spawnflags", tostring( self.kvNum + self.longNum + self.pushNum + self.fadeNum ) )
 		self.ent4:Spawn()
 		self.ent4:Activate()
@@ -59,10 +75,10 @@ if SERVER then
 		end
 
 		if GetConVarNumber( "npcg_squad_wakeupall" ) != 0	then	
-			self.ent1:SetKeyValue( "wakesquad", 1 )	
-			self.ent2:SetKeyValue( "wakesquad", 1 )	
-			self.ent3:SetKeyValue( "wakesquad", 1 )	
-			self.ent4:SetKeyValue( "wakesquad", 1 )	
+			self.ent1:SetKeyValue( "wakesquad", 1 ) 
+			self.ent2:SetKeyValue( "wakesquad", 1 ) 
+			self.ent3:SetKeyValue( "wakesquad", 1 ) 
+			self.ent4:SetKeyValue( "wakesquad", 1 ) 
 		end
 
 		timer.Simple(0, function()

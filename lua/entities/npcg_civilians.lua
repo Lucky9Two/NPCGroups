@@ -23,9 +23,13 @@ if SERVER then
 		
 		self.ent1 = ents.Create("npc_citizen")
 		self.ent1:SetPos(self:GetPos() + self:GetForward() * 25 + self:GetRight() * -25)
-		self.ent1:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent1:SetAngles( Angle( 0 , 0 , 0 ) )
+		else
+			self.ent1:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		end
 		self.ent1:SetKeyValue( "citizentype", "1" )
-		if self.randomModel == 0 then	self.ent1:SetModel("models/humans/group01/male_04.mdl" )	end
+		if self.randomModel == 0 then	self.ent1:SetModel("models/humans/group01/male_04.mdl" ) end
 		self.ent1:SetKeyValue( "DontPickupWeapons", "1" )
 		self.ent1:SetKeyValue( "Expression Type", "Scared" )
 		self.ent1:SetKeyValue( "spawnflags", tostring( self.kvNum + self.longNum + self.weaponNum + self.pushNum + self.fadeNum ) )
@@ -36,9 +40,13 @@ if SERVER then
 
 		self.ent2 = ents.Create("npc_citizen")
 		self.ent2:SetPos(self:GetPos() + self:GetForward() * 25 + self:GetRight() * 25)
-		self.ent2:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent2:SetAngles( Angle( 0 , 0 , 0 ) )
+		else
+			self.ent2:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		end
 		self.ent2:SetKeyValue( "citizentype", "1" )
-		if self.randomModel == 0 then	self.ent2:SetModel("models/humans/group01/female_02.mdl" )	end
+		if self.randomModel == 0 then	self.ent2:SetModel("models/humans/group01/female_02.mdl" ) end
 		self.ent2:SetKeyValue( "DontPickupWeapons", "1" )
 		self.ent2:SetKeyValue( "Expression Type", "Scared" )
 		self.ent2:SetKeyValue( "spawnflags", tostring( self.kvNum + self.longNum + self.weaponNum + self.pushNum + self.fadeNum ) )
@@ -49,9 +57,13 @@ if SERVER then
 
 		self.ent3 = ents.Create("npc_citizen")
 		self.ent3:SetPos(self:GetPos() + self:GetForward() * -25 + self:GetRight() * -25)
-		self.ent3:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent3:SetAngles( Angle( 0 , 0 , 0 ) )
+		else
+			self.ent3:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		end
 		self.ent3:SetKeyValue( "citizentype", "1" )
-		if self.randomModel == 0 then	self.ent3:SetModel("models/humans/group01/male_03.mdl" )	end
+		if self.randomModel == 0 then	self.ent3:SetModel("models/humans/group01/male_03.mdl" ) end
 		self.ent3:SetKeyValue( "DontPickupWeapons", "1" )
 		self.ent3:SetKeyValue( "Expression Type", "Scared" )
 		self.ent3:SetKeyValue( "spawnflags", tostring( self.kvNum + self.longNum + self.weaponNum + self.pushNum + self.fadeNum ) )
@@ -62,9 +74,13 @@ if SERVER then
 		
 		self.ent4 = ents.Create("npc_citizen")
 		self.ent4:SetPos(self:GetPos() + self:GetForward() * -25 + self:GetRight() * 25)
-		self.ent4:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent4:SetAngles( Angle( 0 , 0 , 0 ) )
+		else
+			self.ent4:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		end
 		self.ent4:SetKeyValue( "citizentype", "1" )
-		if self.randomModel == 0 then	self.ent4:SetModel("models/humans/group01/female_04.mdl" )	end
+		if self.randomModel == 0 then	self.ent4:SetModel("models/humans/group01/female_04.mdl" ) end
 		self.ent4:SetKeyValue( "DontPickupWeapons", "1" )
 		self.ent4:SetKeyValue( "Expression Type", "Scared" )
 		self.ent4:SetKeyValue( "spawnflags", tostring( self.kvNum + self.longNum + self.weaponNum + self.pushNum + self.fadeNum ) )
@@ -74,17 +90,17 @@ if SERVER then
 		self.ent4:SetSchedule( SCHED_IDLE_WANDER )
 
 		if GetConVarNumber( "npcg_squad_human" ) != 0	then
-			self.ent1:SetKeyValue( "SquadName", "HumanSquad" )
-			self.ent2:SetKeyValue( "SquadName", "HumanSquad" )
-			self.ent3:SetKeyValue( "SquadName", "HumanSquad" )
-			self.ent4:SetKeyValue( "SquadName", "HumanSquad" )
+			self.ent1:SetKeyValue( "SquadName", "Human" )
+			self.ent2:SetKeyValue( "SquadName", "Human" )
+			self.ent3:SetKeyValue( "SquadName", "Human" )
+			self.ent4:SetKeyValue( "SquadName", "Human" )
 		end
 
 		if GetConVarNumber( "npcg_squad_wakeupall" ) != 0	then	
-			self.ent1:SetKeyValue( "wakesquad", 1 )	
-			self.ent2:SetKeyValue( "wakesquad", 1 )	
-			self.ent3:SetKeyValue( "wakesquad", 1 )	
-			self.ent4:SetKeyValue( "wakesquad", 1 )	
+			self.ent1:SetKeyValue( "wakesquad", 1 ) 
+			self.ent2:SetKeyValue( "wakesquad", 1 ) 
+			self.ent3:SetKeyValue( "wakesquad", 1 ) 
+			self.ent4:SetKeyValue( "wakesquad", 1 ) 
 		end
 
 		self.ent1:AddRelationship("npc_combine_s D_FR 20")

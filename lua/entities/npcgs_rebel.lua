@@ -29,9 +29,13 @@ if SERVER then
 		
 		self.ent1 = ents.Create("npc_citizen")
 		self.ent1:SetPos(self:GetPos())
-		self.ent1:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent1:SetAngles( Angle( 0 , 0 , 0 ) )
+		else
+			self.ent1:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		end
 		self.ent1:SetKeyValue( "citizentype", 3 )
-		if self.randomModel == 0 then	self.ent1:SetModel("models/humans/group01/male_07.mdl" )	end
+		if self.randomModel == 0 then	self.ent1:SetModel("models/humans/group01/male_07.mdl" ) end
 		self.ent1:SetKeyValue( "DontPickupWeapons", GetConVarNumber("npcg_pickupguns") )
 		self.ent1:SetKeyValue( "additionalequipment", table.Random( _WEP ) )
 		self.ent1:SetKeyValue( "Expression Type", "Random" )
@@ -42,11 +46,11 @@ if SERVER then
 		self.ent1:SetSchedule( SCHED_IDLE_WANDER )
 		
 		if GetConVarNumber( "npcg_squad_human" ) != 0	then
-			self.ent1:SetKeyValue( "SquadName", "HumanSquad" )
+			self.ent1:SetKeyValue( "SquadName", "Human" )
 		end
 
 		if GetConVarNumber( "npcg_squad_wakeupall" ) != 0	then	
-			self.ent1:SetKeyValue( "wakesquad", 1 )	
+			self.ent1:SetKeyValue( "wakesquad", 1 ) 
 		end
 
 		if	GetConVarNumber("npcg_accuracy_rebel") >= 4	then

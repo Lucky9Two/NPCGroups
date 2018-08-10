@@ -22,7 +22,11 @@ if SERVER then
 		
 		self.ent1 = ents.Create("npc_vortigaunt")
 		self.ent1:SetPos(self:GetPos())
-		self.ent1:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent1:SetAngles( Angle( 0 , 0 , 0 ) )
+		else
+			self.ent1:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		end
 		self.ent1:SetModel( "models/vortigaunt_slave.mdl"	)
 		self.ent1:SetKeyValue( "wakeradius", GetConVarNumber( "npcg_wakeradius_vort" ) )
 		self.ent1:SetKeyValue( "spawnflags", tostring( self.kvNum + self.longNum + self.pushNum + self.fadeNum ) )
@@ -35,11 +39,11 @@ if SERVER then
 		end
 
 		if GetConVarNumber( "npcg_squad_wakeupall" ) != 0	then	
-			self.ent1:SetKeyValue( "wakesquad", 1 )	
+			self.ent1:SetKeyValue( "wakesquad", 1 ) 
 		end
 
 		if GetConVarNumber( "npcg_regenhealth_vort" ) != 0	then	
-			self.ent1:SetKeyValue( "HealthRegenerateEnabled", 1 )	
+			self.ent1:SetKeyValue( "HealthRegenerateEnabled", 1 ) 
 		end
 
 		if	GetConVarNumber("npcg_accuracy_vortigaunt") >= 4	then

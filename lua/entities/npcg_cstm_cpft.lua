@@ -26,7 +26,11 @@ if SERVER then
 		
 		self.ent1 = ents.Create("npc_metropolice")
 		self.ent1:SetPos(self:GetPos())
-		self.ent1:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent1:SetAngles( Angle( 0 , 0 , 0 ) )
+		else
+			self.ent1:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		end
 		self.ent1:SetModel(GetConVarString("npcg_custom_model_cp") )
 		self.ent1:SetKeyValue( "additionalequipment", table.Random(_WEP) )
 		self.ent1:SetKeyValue( "spawnflags", tostring( self.kvNum + self.longNum + self.weaponNum + self.pushNum + self.fadeNum ) )
@@ -37,7 +41,11 @@ if SERVER then
 
 		self.ent2 = ents.Create("npc_metropolice")
 		self.ent2:SetPos(self:GetPos() + self:GetForward() * 50 + self:GetRight() * 50)
-		self.ent2:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent2:SetAngles( Angle( 0 , 0 , 0 ) )
+		else
+			self.ent2:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		end
 		self.ent2:SetModel(GetConVarString("npcg_custom_model_cp") )
 		self.ent2:SetKeyValue( "additionalequipment", table.Random(_WEP) )
 		self.ent2:SetKeyValue( "spawnflags", tostring( self.kvNum + self.longNum + self.weaponNum + self.pushNum + self.fadeNum ) )
@@ -48,7 +56,11 @@ if SERVER then
 
 		self.ent3 = ents.Create("npc_metropolice")
 		self.ent3:SetPos(self:GetPos() + self:GetForward() * 50 + self:GetRight() * -50)
-		self.ent3:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent3:SetAngles( Angle( 0 , 0 , 0 ) )
+		else
+			self.ent3:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		end
 		self.ent3:SetModel(GetConVarString("npcg_custom_model_cp") )
 		self.ent3:SetKeyValue( "additionalequipment", table.Random(_WEP) )
 		self.ent3:SetKeyValue( "spawnflags", tostring( self.kvNum + self.longNum + self.weaponNum + self.pushNum + self.fadeNum ) )
@@ -59,7 +71,11 @@ if SERVER then
 		
 		self.ent4 = ents.Create("npc_metropolice")
 		self.ent4:SetPos(self:GetPos() + self:GetForward() * -50 + self:GetRight() * 50)
-		self.ent4:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent4:SetAngles( Angle( 0 , 0 , 0 ) )
+		else
+			self.ent4:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		end
 		self.ent4:SetModel(GetConVarString("npcg_custom_model_cp") )
 		self.ent4:SetKeyValue( "additionalequipment", table.Random(_WEP) )
 		self.ent4:SetKeyValue( "spawnflags", tostring( self.kvNum + self.longNum + self.weaponNum + self.pushNum + self.fadeNum ) )
@@ -70,30 +86,34 @@ if SERVER then
 		
 		self.ent5 = ents.Create("npc_metropolice")
 		self.ent5:SetPos(self:GetPos() + self:GetForward() * -50 + self:GetRight() * -50)
-		self.ent5:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent5:SetAngles( Angle( 0 , 0 , 0 ) )
+			else
+			self.ent5:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+			end
 		self.ent5:SetModel(GetConVarString("npcg_custom_model_cp") )
 		self.ent5:SetKeyValue( "additionalequipment", table.Random(_WEP) )
 		self.ent5:SetKeyValue( "manhacks", GetConVarNumber("npcg_manhackcount") )
 		self.ent5:SetKeyValue( "spawnflags", tostring( self.kvNum + self.longNum + self.weaponNum + self.pushNum + self.fadeNum ) )
 		self.ent5:SetKeyValue( "wakeradius", GetConVarNumber( "npcg_wakeradius_cp" ) )
-		self.ent5:Spawn()	
-		self.ent5:Activate()	
+		self.ent5:Spawn() 
+		self.ent5:Activate() 
 		self.ent5:SetSchedule( SCHED_IDLE_WANDER )
 
 		if GetConVarNumber( "npcg_squad_police" ) != 0	then
-			self.ent1:SetKeyValue( "SquadName", "PoliceSquad" )
-			self.ent2:SetKeyValue( "SquadName", "PoliceSquad" )
-			self.ent3:SetKeyValue( "SquadName", "PoliceSquad" )
-			self.ent4:SetKeyValue( "SquadName", "PoliceSquad" )
-			self.ent5:SetKeyValue( "SquadName", "PoliceSquad" )
+			self.ent1:SetKeyValue( "SquadName", "Combine" )
+			self.ent2:SetKeyValue( "SquadName", "Combine" )
+			self.ent3:SetKeyValue( "SquadName", "Combine" )
+			self.ent4:SetKeyValue( "SquadName", "Combine" )
+			self.ent5:SetKeyValue( "SquadName", "Combine" )
 		end
 
 		if GetConVarNumber( "npcg_squad_wakeupall" ) != 0	then	
-			self.ent1:SetKeyValue( "wakesquad", 1 )	
-			self.ent2:SetKeyValue( "wakesquad", 1 )	
-			self.ent3:SetKeyValue( "wakesquad", 1 )	
-			self.ent4:SetKeyValue( "wakesquad", 1 )	
-			self.ent5:SetKeyValue( "wakesquad", 1 )	
+			self.ent1:SetKeyValue( "wakesquad", 1 ) 
+			self.ent2:SetKeyValue( "wakesquad", 1 ) 
+			self.ent3:SetKeyValue( "wakesquad", 1 ) 
+			self.ent4:SetKeyValue( "wakesquad", 1 ) 
+			self.ent5:SetKeyValue( "wakesquad", 1 ) 
 		end
 
 		if	GetConVarNumber("npcg_accuracy_cp") >= 4	then
@@ -125,7 +145,7 @@ if SERVER then
 			self.ent2:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_POOR)
 			self.ent3:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_POOR)
 			self.ent4:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_POOR)
-			self.ent5:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_POOR)		
+			self.ent5:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_POOR) 	
 		end
 
 		timer.Simple(0, function()

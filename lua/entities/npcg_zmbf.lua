@@ -24,16 +24,20 @@ if SERVER then
 
 		self.kvNum = 0
 		
-		if self.torsoChance == 1	and	IsMounted( "ep2" )	then	
-			self.ent1 = ents.Create("npc_fastzombie_torso")	
-			self.ent3 = ents.Create("npc_fastzombie_torso")	
+		if self.torsoChance == 1	and	IsMounted( "ep2" ) then	
+			self.ent1 = ents.Create("npc_fastzombie_torso") 
+			self.ent3 = ents.Create("npc_fastzombie_torso") 
 		else	
-			self.ent1 = ents.Create("npc_fastzombie")	
-			self.ent3 = ents.Create("npc_fastzombie")	
+			self.ent1 = ents.Create("npc_fastzombie") 
+			self.ent3 = ents.Create("npc_fastzombie") 
 		end
 		
 		self.ent1:SetPos(self:GetPos())
-		self.ent1:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent1:SetAngles( Angle( 0 , 0 , 0 ) )
+		else
+			self.ent1:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		end
 		self.ent1:SetHealth( GetConVarNumber("npcg_healthoverride_zmb") )
 		self.ent1:SetKeyValue( "spawnflags", tostring( self.kvNum + self.longNum + self.pushNum + self.fadeNum ) )
 		self.ent1:SetKeyValue( "wakeradius", GetConVarNumber( "npcg_wakeradius_zmb" ) )
@@ -43,7 +47,11 @@ if SERVER then
 		
 		self.ent2 = ents.Create("npc_fastzombie")
 		self.ent2:SetPos(self:GetPos() + self:GetForward() * 100 + self:GetRight() * 100)
-		self.ent2:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent2:SetAngles( Angle( 0 , 0 , 0 ) )
+		else
+			self.ent2:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		end
 		self.ent2:SetHealth( GetConVarNumber("npcg_healthoverride_zmb") )
 		self.ent2:SetKeyValue( "spawnflags", tostring( self.kvNum + self.longNum + self.pushNum + self.fadeNum ) )
 		self.ent2:SetKeyValue( "wakeradius", GetConVarNumber( "npcg_wakeradius_zmb" ) )
@@ -52,7 +60,11 @@ if SERVER then
 		self.ent2:SetSchedule( SCHED_IDLE_WANDER )
 		
 		self.ent3:SetPos(self:GetPos() + self:GetForward() * 100 + self:GetRight() * -100)
-		self.ent3:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent3:SetAngles( Angle( 0 , 0 , 0 ) )
+		else
+			self.ent3:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		end
 		self.ent3:SetHealth( GetConVarNumber("npcg_healthoverride_zmb") )
 		self.ent3:SetKeyValue( "spawnflags", tostring( self.kvNum + self.longNum + self.pushNum + self.fadeNum ) )
 		self.ent3:SetKeyValue( "wakeradius", GetConVarNumber( "npcg_wakeradius_zmb" ) )
@@ -62,7 +74,11 @@ if SERVER then
 
 		self.ent4 = ents.Create("npc_fastzombie")
 		self.ent4:SetPos(self:GetPos() + self:GetForward() * 120 + self:GetRight() * 0)
-		self.ent4:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent4:SetAngles( Angle( 0 , 0 , 0 ) )
+		else
+			self.ent4:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		end
 		self.ent4:SetHealth( GetConVarNumber("npcg_healthoverride_zmb") )
 		self.ent4:SetKeyValue( "spawnflags", tostring( self.kvNum + self.longNum + self.pushNum + self.fadeNum ) )
 		self.ent4:SetKeyValue( "wakeradius", GetConVarNumber( "npcg_wakeradius_zmb" ) )
@@ -71,17 +87,17 @@ if SERVER then
 		self.ent4:SetSchedule( SCHED_IDLE_WANDER )
 
 		if GetConVarNumber( "npcg_squad_zombie" ) > 0	then
-			self.ent1:SetKeyValue( "SquadName", "ZombieSquad" )
-			self.ent2:SetKeyValue( "SquadName", "ZombieSquad" )
-			self.ent3:SetKeyValue( "SquadName", "ZombieSquad" )
-			self.ent4:SetKeyValue( "SquadName", "ZombieSquad" )
+			self.ent1:SetKeyValue( "SquadName", "Zombie" )
+			self.ent2:SetKeyValue( "SquadName", "Zombie" )
+			self.ent3:SetKeyValue( "SquadName", "Zombie" )
+			self.ent4:SetKeyValue( "SquadName", "Zombie" )
 		end
 
 		if GetConVarNumber( "npcg_squad_wakeupall" ) != 0	then	
-			self.ent1:SetKeyValue( "wakesquad", 1 )	
-			self.ent2:SetKeyValue( "wakesquad", 1 )	
-			self.ent3:SetKeyValue( "wakesquad", 1 )	
-			self.ent4:SetKeyValue( "wakesquad", 1 )	
+			self.ent1:SetKeyValue( "wakesquad", 1 ) 
+			self.ent2:SetKeyValue( "wakesquad", 1 ) 
+			self.ent3:SetKeyValue( "wakesquad", 1 ) 
+			self.ent4:SetKeyValue( "wakesquad", 1 ) 
 		end
 		
 		timer.Simple(0, function()

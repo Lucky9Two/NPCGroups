@@ -25,11 +25,15 @@ if SERVER then
 		
 		self.ent1 = ents.Create("npc_alyx")
 		self.ent1:SetPos(self:GetPos())
-		self.ent1:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )	
+		if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent1:SetAngles( Angle( 0 , 0 , 0 ) )
+		else
+			self.ent1:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		end 
 		if IsMounted( "ep2" ) or IsMounted( "episodic" ) then
-			self.ent1:SetKeyValue( "additionalequipment", "weapon_alyxgun" )	
+			self.ent1:SetKeyValue( "additionalequipment", "weapon_alyxgun" ) 
 		else	
-			self.ent1:SetKeyValue( "additionalequipment", "weapon_shotgun" )	
+			self.ent1:SetKeyValue( "additionalequipment", "weapon_shotgun" ) 
 		end
 		self.ent1:SetKeyValue( "spawnflags", tostring( self.kvNum + self.longNum + self.weaponNum + self.pushNum + self.fadeNum ) )
 		self.ent1:SetKeyValue( "wakeradius", GetConVarNumber( "npcg_wakeradius_alyx" ) )
@@ -38,15 +42,15 @@ if SERVER then
 		self.ent1:SetSchedule( SCHED_IDLE_WANDER )
 
 		if GetConVarNumber( "npcg_squad_human" ) != 0	then
-			self.ent1:SetKeyValue( "SquadName", "HumanSquad" )
+			self.ent1:SetKeyValue( "SquadName", "Human" )
 		end
 		
 		if GetConVarNumber( "npcg_squad_wakeupall" ) != 0	then	
-			self.ent1:SetKeyValue( "wakesquad", 1 )	
+			self.ent1:SetKeyValue( "wakesquad", 1 ) 
 		end
 
 		if GetConVarNumber( "npcg_regenhealth_ally" ) != 0	then	
-			self.ent1:SetKeyValue( "HealthRegenerateEnabled", 1 )	
+			self.ent1:SetKeyValue( "HealthRegenerateEnabled", 1 ) 
 		end
 
 		if	GetConVarNumber("npcg_accuracy_alyx") >= 4	then

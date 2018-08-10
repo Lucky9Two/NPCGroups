@@ -23,7 +23,11 @@ if SERVER then
 		
 		self.ent1 = ents.Create("npc_monk")
 		self.ent1:SetPos(self:GetPos())
-		self.ent1:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent1:SetAngles( Angle( 0 , 0 , 0 ) )
+		else
+			self.ent1:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		end
 		self.ent1:SetHealth( GetConVarNumber("npcg_healthoverride_monk") )
 		self.ent1:SetKeyValue( "DontPickupWeapons", "false" )
 		self.ent1:SetKeyValue( "additionalequipment", "weapon_annabelle" )

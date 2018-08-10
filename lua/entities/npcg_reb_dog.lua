@@ -35,7 +35,11 @@ if SERVER then
 		
 		self.ent1 = ents.Create("npc_dog")
 		self.ent1:SetPos(self:GetPos() + self:GetForward()*50 )
-		self.ent1:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent1:SetAngles( Angle( 0 , 0 , 0 ) )
+		else
+			self.ent1:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		end
 		self.ent1:SetKeyValue( "spawnflags", tostring( self.kvNum + self.longNum + self.pushNum + self.fadeNum ) )
 		self.ent1:SetKeyValue( "wakeradius", GetConVarNumber( "npcg_wakeradius_dog" ) )
 		self.ent1:Spawn()
@@ -44,7 +48,11 @@ if SERVER then
 		
 		self.ent2 = ents.Create("npc_barney")
 		self.ent2:SetPos(self:GetPos() + self:GetForward() + self:GetRight() * 50)
-		self.ent2:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent2:SetAngles( Angle( 0 , 0 , 0 ) )
+		else
+			self.ent2:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		end
 		self.ent2:SetKeyValue( "additionalequipment", "weapon_ar2" )
 		self.ent2:SetKeyValue( "Expression Type", "Random" )
 		self.ent2:SetKeyValue( "spawnflags", tostring( self.kvNum + self.longNum + self.weaponNum + self.pushNum + self.fadeNum ) )
@@ -55,9 +63,13 @@ if SERVER then
 		
 		self.ent3 = ents.Create("npc_citizen")
 		self.ent3:SetPos(self:GetPos() + self:GetForward() * -50 + self:GetRight() )
-		self.ent3:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent3:SetAngles( Angle( 0 , 0 , 0 ) )
+		else
+			self.ent3:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		end
 		self.ent3:SetKeyValue( "citizentype", math.random(0,3) )
-		if self.randomModel == 0 then	self.ent3:SetModel("models/humans/group01/female_03.mdl" )	end
+		if self.randomModel == 0 then	self.ent3:SetModel("models/humans/group01/female_03.mdl" ) end
 		self.ent3:SetKeyValue( "DontPickupWeapons", GetConVarNumber("npcg_pickupguns") )
 		self.ent3:SetKeyValue( "additionalequipment", table.Random( _WEP ) )
 		self.ent3:SetKeyValue( "Expression Type", "Random" )
@@ -69,11 +81,15 @@ if SERVER then
 		
 		self.ent4 = ents.Create("npc_alyx")
 		self.ent4:SetPos(self:GetPos() + self:GetForward() + self:GetRight() * -50)
-		self.ent4:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )	
+		if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent4:SetAngles( Angle( 0 , 0 , 0 ) )
+		else
+			self.ent4:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		end 
 		if IsMounted( "ep2" ) or IsMounted( "episodic" ) then
-			self.ent4:SetKeyValue( "additionalequipment", "weapon_alyxgun" )	
+			self.ent4:SetKeyValue( "additionalequipment", "weapon_alyxgun" ) 
 		else	
-			self.ent4:SetKeyValue( "additionalequipment", "weapon_shotgun" )	
+			self.ent4:SetKeyValue( "additionalequipment", "weapon_shotgun" ) 
 		end
 		self.ent4:SetKeyValue( "spawnflags", tostring( self.kvNum + self.longNum + self.weaponNum + self.pushNum + self.fadeNum ) )
 		self.ent4:SetKeyValue( "wakeradius", GetConVarNumber( "npcg_wakeradius_alyx" ) )
@@ -82,29 +98,29 @@ if SERVER then
 		self.ent4:SetSchedule( SCHED_IDLE_WANDER )
 
 		if GetConVarNumber( "npcg_squad_human" ) != 0	then
-			self.ent1:SetKeyValue( "SquadName", "HumanSquad" )
-			self.ent2:SetKeyValue( "SquadName", "HumanSquad" )
-			self.ent3:SetKeyValue( "SquadName", "HumanSquad" )
-			self.ent4:SetKeyValue( "SquadName", "HumanSquad" )
+			self.ent1:SetKeyValue( "SquadName", "Human" )
+			self.ent2:SetKeyValue( "SquadName", "Human" )
+			self.ent3:SetKeyValue( "SquadName", "Human" )
+			self.ent4:SetKeyValue( "SquadName", "Human" )
 		end
 		
 		if GetConVarNumber( "npcg_squad_wakeupall" ) != 0	then	
-			self.ent1:SetKeyValue( "wakesquad", 1 )	
-			self.ent2:SetKeyValue( "wakesquad", 1 )	
-			self.ent3:SetKeyValue( "wakesquad", 1 )	
-			self.ent4:SetKeyValue( "wakesquad", 1 )	
+			self.ent1:SetKeyValue( "wakesquad", 1 ) 
+			self.ent2:SetKeyValue( "wakesquad", 1 ) 
+			self.ent3:SetKeyValue( "wakesquad", 1 ) 
+			self.ent4:SetKeyValue( "wakesquad", 1 ) 
 		end
 		if GetConVarNumber( "npcg_regenhealth_ally" ) != 0	then	
-			self.ent1:SetKeyValue( "HealthRegenerateEnabled", 1 )	
-			self.ent2:SetKeyValue( "HealthRegenerateEnabled", 1 )	
-			self.ent4:SetKeyValue( "HealthRegenerateEnabled", 1 )	
+			self.ent1:SetKeyValue( "HealthRegenerateEnabled", 1 ) 
+			self.ent2:SetKeyValue( "HealthRegenerateEnabled", 1 ) 
+			self.ent4:SetKeyValue( "HealthRegenerateEnabled", 1 ) 
 		end
 		if GetConVarNumber( "npcg_squad_human" ) != 0	then
-			self.ent1:SetKeyValue( "SquadName", "HumanSquad" )
+			self.ent1:SetKeyValue( "SquadName", "Human" )
 		end
 		
 		if GetConVarNumber( "npcg_squad_wakeupall" ) != 0	then	
-			self.ent1:SetKeyValue( "wakesquad", 1 )	
+			self.ent1:SetKeyValue( "wakesquad", 1 ) 
 		end
 		if	GetConVarNumber("npcg_accuracy_dog") >= 4	then
 			self.ent1:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_PERFECT)

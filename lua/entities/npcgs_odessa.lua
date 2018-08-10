@@ -22,7 +22,11 @@ if SERVER then
 		
 		self.ent1 = ents.Create("npc_citizen")
 		self.ent1:SetPos(self:GetPos())
-		self.ent1:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent1:SetAngles( Angle( 0 , 0 , 0 ) )
+		else
+			self.ent1:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		end
 		self.ent1:SetKeyValue( "citizentype", "4" )
 		self.ent1:SetModel( "models/odessa.mdl" )
 		self.ent1:SetKeyValue( "spawnflags", tostring( self.kvNum + self.longNum + self.weaponNum + self.pushNum + self.fadeNum ) )
@@ -52,11 +56,11 @@ if SERVER then
 		self.ent1:AddRelationship("npc_headcrab_black D_FR 100")
 
 		if GetConVarNumber( "npcg_squad_human" ) != 0	then
-			self.ent1:SetKeyValue( "SquadName", "HumanSquad" )
+			self.ent1:SetKeyValue( "SquadName", "Human" )
 		end
 
 		if GetConVarNumber( "npcg_squad_wakeupall" ) != 0	then	
-			self.ent1:SetKeyValue( "wakesquad", 1 )	
+			self.ent1:SetKeyValue( "wakesquad", 1 ) 
 		end
 
 		if	GetConVarNumber("npcg_accuracy_rebel") >= 4	then

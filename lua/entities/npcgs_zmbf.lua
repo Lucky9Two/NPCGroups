@@ -25,12 +25,16 @@ if SERVER then
 		self.kvNum = 0
 		
 		if self.torsoChance == 1	and	 IsMounted( "ep2" ) 	then	
-			self.ent1 = ents.Create("npc_fastzombie_torso")	
+			self.ent1 = ents.Create("npc_fastzombie_torso") 
 		else	
-			self.ent1 = ents.Create("npc_fastzombie")	
+			self.ent1 = ents.Create("npc_fastzombie") 
 		end
 		self.ent1:SetPos(self:GetPos() )
-		self.ent1:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent1:SetAngles( Angle( 0 , 0 , 0 ) )
+		else
+			self.ent1:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		end
 		self.ent1:SetHealth( GetConVarNumber("npcg_healthoverride_zmb") )
 		self.ent1:SetKeyValue( "wakeradius", GetConVarNumber( "npcg_wakeradius_zmb" ) )
 		self.ent1:SetKeyValue( "spawnflags", tostring( self.kvNum + self.longNum + self.pushNum + self.fadeNum ) )
@@ -39,11 +43,11 @@ if SERVER then
 		self.ent1:SetSchedule( SCHED_IDLE_WANDER )
 
 		if GetConVarNumber( "npcg_squad_zombie" ) != 0	then
-			self.ent1:SetKeyValue( "SquadName", "ZombieSquad" )
+			self.ent1:SetKeyValue( "SquadName", "Zombie" )
 		end
 		
 		if GetConVarNumber( "npcg_squad_wakeupall" ) != 0	then	
-			self.ent1:SetKeyValue( "wakesquad", 1 )	
+			self.ent1:SetKeyValue( "wakesquad", 1 ) 
 		end
 
 		timer.Simple(0, function()

@@ -30,9 +30,13 @@ if SERVER then
 		
 		self.ent1 = ents.Create("npc_citizen")
 		self.ent1:SetPos(self:GetPos())
-		self.ent1:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent1:SetAngles( Angle( 0 , 0 , 0 ) )
+		else
+			self.ent1:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		end
 		self.ent1:SetKeyValue( "citizentype", math.random(2,3) )
-		if self.randomModel == 0 then	self.ent1:SetModel("models/humans/group03/male_07.mdl" )	end
+		if self.randomModel == 0 then	self.ent1:SetModel("models/humans/group03/male_07.mdl" ) end
 		self.ent1:SetKeyValue( "DontPickupWeapons", GetConVarNumber("npcg_pickupguns") )
 		self.ent1:SetKeyValue( "additionalequipment", table.Random( _WEP ) )
 		self.ent1:SetKeyValue( "Expression Type", "Random" )
@@ -44,9 +48,13 @@ if SERVER then
 		
 		self.ent2 = ents.Create("npc_citizen")
 		self.ent2:SetPos(self:GetPos() + self:GetForward() * 50 + self:GetRight() * 50)
-		self.ent2:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent2:SetAngles( Angle( 0 , 0 , 0 ) )
+		else
+			self.ent2:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		end
 		self.ent2:SetKeyValue( "citizentype", math.random(2,3) )
-		if self.randomModel == 0 then	self.ent2:SetModel("models/humans/group03/male_06.mdl" )	end
+		if self.randomModel == 0 then	self.ent2:SetModel("models/humans/group03/male_06.mdl" ) end
 		self.ent2:SetKeyValue( "DontPickupWeapons", GetConVarNumber("npcg_pickupguns") )
 		self.ent2:SetKeyValue( "additionalequipment", table.Random( _WEP ) )
 		self.ent2:SetKeyValue( "Expression Type", "Random" )
@@ -59,8 +67,12 @@ if SERVER then
 		if IsMounted( "ep2" ) then
 			self.ent3 = ents.Create("npc_vortigaunt")
 			self.ent3:SetPos(self:GetPos() + self:GetForward() * 50 + self:GetRight() * -50)
+			if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent3:SetAngles( Angle( 0 , 0 , 0 ) )
+		else
 			self.ent3:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
-			if GetConVarNumber( "npcg_squad_vort" ) != 0	then	self.ent3:SetKeyValue( "SquadName", "HumanSquad" )	end
+		end
+			if GetConVarNumber( "npcg_squad_vort" ) != 0	then	self.ent3:SetKeyValue( "SquadName", "Human" ) end
 			if	GetConVarNumber("npcg_accuracy_vortigaunt") >= 4	then
 				self.ent3:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_PERFECT)
 			elseif	GetConVarNumber("npcg_accuracy_vortigaunt") == 3	then
@@ -70,7 +82,7 @@ if SERVER then
 			elseif	GetConVarNumber("npcg_accuracy_vortigaunt") == 1	then
 				self.ent3:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_AVERAGE)
 			else
-				self.ent3:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_POOR)		
+				self.ent3:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_POOR) 	
 			end
 			self.ent3:SetKeyValue( "spawnflags", tostring( self.kvNum + self.longNum + self.weaponNum + self.pushNum + self.fadeNum + self.resupplyChance + self.medicChance ) )
 			self.ent3:SetKeyValue( "wakeradius", GetConVarNumber( "npcg_wakeradius_human" ) )
@@ -80,10 +92,14 @@ if SERVER then
 		else
 			self.ent3 = ents.Create("npc_citizen")
 			self.ent3:SetPos(self:GetPos() + self:GetForward() * 50 + self:GetRight() * -50)
+			if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent3:SetAngles( Angle( 0 , 0 , 0 ) )
+		else
 			self.ent3:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		end
 			self.ent3:SetKeyValue( "citizentype", math.random(2,3) )
-			if self.randomModel == 0 then	self.ent3:SetModel("models/humans/group03/female_03.mdl" )	end
-			if GetConVarNumber( "npcg_squad_human" ) != 0	then	self.ent3:SetKeyValue( "SquadName", "HumanSquad" )	end
+			if self.randomModel == 0 then	self.ent3:SetModel("models/humans/group03/female_03.mdl" ) end
+			if GetConVarNumber( "npcg_squad_human" ) != 0	then	self.ent3:SetKeyValue( "SquadName", "Human" ) end
 			if	GetConVarNumber("npcg_accuracy_rebel") >= 4	then
 				self.ent3:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_PERFECT)
 			elseif	GetConVarNumber("npcg_accuracy_rebel") == 3	then
@@ -93,7 +109,7 @@ if SERVER then
 			elseif	GetConVarNumber("npcg_accuracy_rebel") == 1	then
 				self.ent3:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_AVERAGE)
 			else
-				self.ent3:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_POOR)		
+				self.ent3:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_POOR) 	
 			end
 			self.ent3:SetKeyValue( "DontPickupWeapons", GetConVarNumber("npcg_pickupguns") )
 			self.ent3:SetKeyValue( "additionalequipment", table.Random( _WEP ) )
@@ -106,14 +122,14 @@ if SERVER then
 		end
 
 		if GetConVarNumber( "npcg_squad_human" ) != 0	then
-			self.ent1:SetKeyValue( "SquadName", "HumanSquad" )
-			self.ent2:SetKeyValue( "SquadName", "HumanSquad" )
+			self.ent1:SetKeyValue( "SquadName", "Human" )
+			self.ent2:SetKeyValue( "SquadName", "Human" )
 		end
 		
 		if GetConVarNumber( "npcg_squad_wakeupall" ) != 0	then	
-			self.ent1:SetKeyValue( "wakesquad", 1 )	
-			self.ent2:SetKeyValue( "wakesquad", 1 )	
-			self.ent3:SetKeyValue( "wakesquad", 1 )	
+			self.ent1:SetKeyValue( "wakesquad", 1 ) 
+			self.ent2:SetKeyValue( "wakesquad", 1 ) 
+			self.ent3:SetKeyValue( "wakesquad", 1 ) 
 		end
 		if	GetConVarNumber("npcg_accuracy_rebel") >= 4	then
 			self.ent1:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_PERFECT)

@@ -23,10 +23,14 @@ if SERVER then
 
 		self.ent1 = ents.Create("npc_stalker")
 		self.ent1:SetPos(self:GetPos() + self:GetForward() + self:GetRight() * 50)
-		self.ent1:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent1:SetAngles( Angle( 0 , 0 , 0 ) )
+		else
+			self.ent1:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		end
 		self.ent1:SetKeyValue( "spawnflags", tostring( self.kvNum + self.longNum + self.pushNum + self.fadeNum ) )
 		self.ent1:SetKeyValue( "wakeradius", GetConVarNumber( "npcg_wakeradius_cmb" ) )
-		self.ent1:SetKeyValue( "BeamPower", GetConVarNumber( "npcg_stalker_beampower" )	)
+		self.ent1:SetKeyValue( "BeamPower", GetConVarNumber( "npcg_stalker_beampower" ) )
 		self.ent1:Spawn()
 		self.ent1:Activate()
 		--self.ent1:Wake()
@@ -34,10 +38,14 @@ if SERVER then
 		
 		self.ent2 = ents.Create("npc_stalker")
 		self.ent2:SetPos(self:GetPos() + self:GetForward() + self:GetRight() * -50)
-		self.ent2:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent2:SetAngles( Angle( 0 , 0 , 0 ) )
+		else
+			self.ent2:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		end
 		self.ent2:SetKeyValue( "spawnflags", tostring( self.kvNum + self.longNum + self.pushNum + self.fadeNum ) )
 		self.ent2:SetKeyValue( "wakeradius", GetConVarNumber( "npcg_wakeradius_cmb" ) )
-		self.ent2:SetKeyValue( "BeamPower", GetConVarNumber( "npcg_stalker_beampower" )	)
+		self.ent2:SetKeyValue( "BeamPower", GetConVarNumber( "npcg_stalker_beampower" ) )
 		self.ent2:Spawn()
 		self.ent2:Activate()
 		--self.ent2:Wake()
@@ -45,19 +53,23 @@ if SERVER then
 		
 		self.ent3 = ents.Create("npc_stalker")
 		self.ent3:SetPos(self:GetPos() )
-		self.ent3:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent3:SetAngles( Angle( 0 , 0 , 0 ) )
+		else
+			self.ent3:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		end
 		self.ent3:SetKeyValue( "spawnflags", tostring( self.kvNum + self.longNum + self.pushNum + self.fadeNum ) )
 		self.ent3:SetKeyValue( "wakeradius", GetConVarNumber( "npcg_wakeradius_cmb" ) )
-		self.ent3:SetKeyValue( "BeamPower", GetConVarNumber( "npcg_stalker_beampower" )	)
+		self.ent3:SetKeyValue( "BeamPower", GetConVarNumber( "npcg_stalker_beampower" ) )
 		self.ent3:Spawn()
 		self.ent3:Activate()
 		--self.ent3:Wake()
 		self.ent3:SetSchedule( SCHED_IDLE_WANDER )
 		
 		if GetConVarNumber( "npcg_squad_combine" ) != 0	then
-			self.ent1:SetKeyValue( "SquadName", "CmbStalkerSquad" )
-			self.ent2:SetKeyValue( "SquadName", "CmbStalkerSquad" )
-			self.ent3:SetKeyValue( "SquadName", "CmbStalkerSquad" )
+			self.ent1:SetKeyValue( "SquadName", "Combine" )
+			self.ent2:SetKeyValue( "SquadName", "Combine" )
+			self.ent3:SetKeyValue( "SquadName", "Combine" )
 		end
 
 		if GetConVarNumber("npcg_accuracy_cmbstalker") >= 4	then
@@ -73,13 +85,13 @@ if SERVER then
 			self.ent2:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_GOOD)
 			self.ent3:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_GOOD)
 		elseif GetConVarNumber("npcg_accuracy_cmbstalker") == 1	then
-			self.ent1:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_AVERAGE)	
-			self.ent2:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_AVERAGE)	
-			self.ent3:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_AVERAGE)	
+			self.ent1:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_AVERAGE) 
+			self.ent2:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_AVERAGE) 
+			self.ent3:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_AVERAGE) 
 		else
-			self.ent1:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_POOR)	
-			self.ent2:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_POOR)	
-			self.ent3:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_POOR)	
+			self.ent1:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_POOR) 
+			self.ent2:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_POOR) 
+			self.ent3:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_POOR) 
 		end
 
 		self.ent1:AddRelationship("player D_HT 200")

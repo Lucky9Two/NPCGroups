@@ -27,7 +27,11 @@ if SERVER then
 		
 		self.ent1 = ents.Create("npc_combine_s")
 		self.ent1:SetPos(self:GetPos())
-		self.ent1:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent1:SetAngles( Angle( 0 , 0 , 0 ) )
+		else
+			self.ent1:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		end
 		self.ent1:SetModel(GetConVarString("npcg_custom_model_combine") )
 		self.ent1:SetHealth( GetConVarNumber("npcg_healthoverride_cmb") )
 		self.ent1:SetKeyValue( "additionalequipment", table.Random( _WEP ) )
@@ -40,7 +44,11 @@ if SERVER then
 		
 		self.ent2 = ents.Create("npc_combine_s")
 		self.ent2:SetPos(self:GetPos() + self:GetRight() * 100 + self:GetForward() * -100)
-		self.ent2:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent2:SetAngles( Angle( 0 , 0 , 0 ) )
+		else
+			self.ent2:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		end
 		self.ent2:SetModel(GetConVarString("npcg_custom_model_combine") )
 		self.ent2:SetHealth( GetConVarNumber("npcg_healthoverride_cmb") )
 		self.ent2:SetKeyValue( "additionalequipment", table.Random( _WEP ) )
@@ -53,7 +61,11 @@ if SERVER then
 		
 		self.ent3 = ents.Create("npc_combine_s")
 		self.ent3:SetPos(self:GetPos() + self:GetRight() * -100 + self:GetForward() * -100)
-		self.ent3:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent3:SetAngles( Angle( 0 , 0 , 0 ) )
+		else
+			self.ent3:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		end
 		self.ent3:SetModel(GetConVarString("npcg_custom_model_combine") )
 		self.ent3:SetHealth( GetConVarNumber("npcg_healthoverride_cmb") )
 		self.ent3:SetKeyValue( "additionalequipment", table.Random( _WEP ) )
@@ -66,7 +78,11 @@ if SERVER then
 		
 		self.ent4 = ents.Create("npc_combine_s")
 		self.ent4:SetPos(self:GetPos() + self:GetForward() * -100 + self:GetRight() * 50)
-		self.ent4:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent4:SetAngles( Angle( 0 , 0 , 0 ) )
+		else
+			self.ent4:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		end
 		self.ent4:SetModel(GetConVarString("npcg_custom_model_combine") )
 		self.ent4:SetHealth( GetConVarNumber("npcg_healthoverride_cmb") )
 		self.ent4:SetKeyValue( "additionalequipment", table.Random( _WEP ) )
@@ -79,7 +95,11 @@ if SERVER then
 		
 		self.ent5 = ents.Create("npc_combine_s")
 		self.ent5:SetPos(self:GetPos() + self:GetForward() * -200 + self:GetRight() * -50)
-		self.ent5:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent5:SetAngles( Angle( 0 , 0 , 0 ) )
+			else
+			self.ent5:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+			end
 		self.ent5:SetModel(GetConVarString("npcg_custom_model_combine") )
 		self.ent5:SetHealth( GetConVarNumber("npcg_healthoverride_cmb") )
 		self.ent5:SetKeyValue( "additionalequipment", table.Random( _WEP ) )
@@ -91,19 +111,19 @@ if SERVER then
 		self.ent5:Activate()
 		
 		if GetConVarNumber( "npcg_squad_combine" ) != 0	then
-			self.ent1:SetKeyValue( "SquadName", "CombineSquad" )
-			self.ent2:SetKeyValue( "SquadName", "CombineSquad" )
-			self.ent3:SetKeyValue( "SquadName", "CombineSquad" )
-			self.ent4:SetKeyValue( "SquadName", "CombineSquad" )
-			self.ent5:SetKeyValue( "SquadName", "CombineSquad" )
+			self.ent1:SetKeyValue( "SquadName", "Combine" )
+			self.ent2:SetKeyValue( "SquadName", "Combine" )
+			self.ent3:SetKeyValue( "SquadName", "Combine" )
+			self.ent4:SetKeyValue( "SquadName", "Combine" )
+			self.ent5:SetKeyValue( "SquadName", "Combine" )
 		end
 
 		if GetConVarNumber( "npcg_squad_wakeupall" ) != 0	then	
-			self.ent1:SetKeyValue( "wakesquad", 1 )	
-			self.ent2:SetKeyValue( "wakesquad", 1 )	
-			self.ent3:SetKeyValue( "wakesquad", 1 )	
-			self.ent4:SetKeyValue( "wakesquad", 1 )	
-			self.ent5:SetKeyValue( "wakesquad", 1 )	
+			self.ent1:SetKeyValue( "wakesquad", 1 ) 
+			self.ent2:SetKeyValue( "wakesquad", 1 ) 
+			self.ent3:SetKeyValue( "wakesquad", 1 ) 
+			self.ent4:SetKeyValue( "wakesquad", 1 ) 
+			self.ent5:SetKeyValue( "wakesquad", 1 ) 
 		end
 			
 		if	GetConVarNumber("npcg_accuracy_combine") >= 4	then
@@ -135,7 +155,7 @@ if SERVER then
 			self.ent2:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_POOR)
 			self.ent3:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_POOR)
 			self.ent4:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_POOR)
-			self.ent5:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_POOR)		
+			self.ent5:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_POOR) 	
 		end
 
 		timer.Simple(0, function()

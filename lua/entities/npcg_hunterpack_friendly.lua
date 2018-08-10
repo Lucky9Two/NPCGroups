@@ -24,7 +24,11 @@ if SERVER then
 		if IsMounted( "ep2" ) then
 			self.ent1 = ents.Create("npc_hunter")
 			self.ent1:SetPos(self:GetPos() + self:GetRight() * -150)
+			if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent1:SetAngles( Angle( 0 , 0 , 0 ) )
+		else
 			self.ent1:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		end
 			self.ent1:SetKeyValue( "spawnflags", tostring( self.kvNum + self.longNum + self.pushNum + self.fadeNum ) )
 			self.ent1:SetKeyValue( "wakeradius", GetConVarNumber( "npcg_wakeradius_hunter" ) )
 			self.ent1:SetSchedule( SCHED_IDLE_WANDER )
@@ -36,7 +40,11 @@ if SERVER then
 			
 			self.ent2 = ents.Create("npc_hunter")
 			self.ent2:SetPos(self:GetPos() + self:GetForward() * 150)
+			if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent2:SetAngles( Angle( 0 , 0 , 0 ) )
+		else
 			self.ent2:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		end
 			self.ent2:SetKeyValue( "spawnflags", tostring( self.kvNum + self.longNum + self.pushNum + self.fadeNum ) )
 			self.ent2:SetKeyValue( "wakeradius", GetConVarNumber( "npcg_wakeradius_hunter" ) )
 			self.ent2:SetSchedule( SCHED_IDLE_WANDER )
@@ -48,7 +56,11 @@ if SERVER then
 			
 			self.ent3 = ents.Create("npc_hunter")
 			self.ent3:SetPos(self:GetPos() + self:GetRight() * 150)
+			if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent3:SetAngles( Angle( 0 , 0 , 0 ) )
+		else
 			self.ent3:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		end
 			self.ent3:SetKeyValue( "spawnflags", tostring( self.kvNum + self.longNum + self.pushNum + self.fadeNum ) )
 			self.ent3:SetKeyValue( "wakeradius", GetConVarNumber( "npcg_wakeradius_hunter" ) )
 			self.ent3:SetSchedule( SCHED_IDLE_WANDER )
@@ -60,7 +72,11 @@ if SERVER then
 		else		
 			self.ent1 = ents.Create("npc_combine_s")
 			self.ent1:SetPos(self:GetPos() + self:GetRight() * -150)
+			if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent1:SetAngles( Angle( 0 , 0 , 0 ) )
+		else
 			self.ent1:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		end
 			self.ent1:SetModel("models/combine_super_soldier.mdl" )
 			self.ent1:SetKeyValue( "additionalequipment", "weapon_ar2" )
 			self.ent1:SetKeyValue( "NumGrenades", GetConVarNumber("npcg_grenadecount") )
@@ -76,7 +92,11 @@ if SERVER then
 			
 			self.ent2 = ents.Create("npc_combine_s")
 			self.ent2:SetPos(self:GetPos() + self:GetForward() * 150)
+			if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent2:SetAngles( Angle( 0 , 0 , 0 ) )
+		else
 			self.ent2:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		end
 			self.ent2:SetModel("models/combine_super_soldier.mdl" )
 			self.ent2:SetKeyValue( "additionalequipment", "weapon_ar2" )
 			self.ent2:SetKeyValue( "NumGrenades", GetConVarNumber("npcg_grenadecount") )
@@ -92,7 +112,11 @@ if SERVER then
 			
 			self.ent3 = ents.Create("npc_combine_s")
 			self.ent3:SetPos(self:GetPos() + self:GetRight() * 150)
+			if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent3:SetAngles( Angle( 0 , 0 , 0 ) )
+		else
 			self.ent3:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		end
 			self.ent3:SetModel("models/combine_super_soldier.mdl" )
 			self.ent3:SetKeyValue( "additionalequipment", "weapon_ar2" )
 			self.ent3:SetKeyValue( "NumGrenades", GetConVarNumber("npcg_grenadecount") )
@@ -108,14 +132,14 @@ if SERVER then
 		end
 		
 		if GetConVarNumber( "npcg_squad_combine" ) != 0	then
-			self.ent1:SetKeyValue( "SquadName", "CombineSquad" )
-			self.ent2:SetKeyValue( "SquadName", "CombineSquad" )
-			self.ent3:SetKeyValue( "SquadName", "CombineSquad" )
+			self.ent1:SetKeyValue( "SquadName", "Combine" )
+			self.ent2:SetKeyValue( "SquadName", "Combine" )
+			self.ent3:SetKeyValue( "SquadName", "Combine" )
 		end
 		if GetConVarNumber( "npcg_squad_wakeupall" ) != 0	then	
-			self.ent3:SetKeyValue( "wakesquad", 1 )	
-			self.ent1:SetKeyValue( "wakesquad", 1 )	
-			self.ent2:SetKeyValue( "wakesquad", 1 )	
+			self.ent3:SetKeyValue( "wakesquad", 1 ) 
+			self.ent1:SetKeyValue( "wakesquad", 1 ) 
+			self.ent2:SetKeyValue( "wakesquad", 1 ) 
 		end
 		if	GetConVarNumber("npcg_accuracy_synth") >= 4	then
 			self.ent1:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_PERFECT)
@@ -136,7 +160,7 @@ if SERVER then
 		else
 			self.ent1:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_POOR)
 			self.ent2:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_POOR)
-			self.ent3:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_POOR)	
+			self.ent3:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_POOR) 
 		end
 
 		timer.Simple(0, function()

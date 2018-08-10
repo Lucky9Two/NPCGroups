@@ -25,7 +25,11 @@ if SERVER then
 		
 		self.ent1 = ents.Create("npc_rollermine")
 		self.ent1:SetPos(self:GetPos())
-		self.ent1:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent1:SetAngles( Angle( 0 , 0 , 0 ) )
+		else
+			self.ent1:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		end
 		--self.ent1:SetHealth( GetConVarNumber("npcg_healthoverride_rollermine") )
 		self.ent1:SetKeyValue( "startburied", GetConVarNumber( "npcg_rollermineburied" ) )
 		self.ent1:SetKeyValue( "spawnflags", tostring( self.kvNum + self.longNum + self.pushNum + self.fadeNum + 4 ) )
@@ -36,7 +40,11 @@ if SERVER then
 		
 		self.ent2 = ents.Create("npc_rollermine")
 		self.ent2:SetPos(self:GetPos() + self:GetForward() * 100 + self:GetRight() * 100)
-		self.ent2:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent2:SetAngles( Angle( 0 , 0 , 0 ) )
+		else
+			self.ent2:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		end
 		--self.ent2:SetHealth( GetConVarNumber("npcg_healthoverride_rollermine") )
 		self.ent2:SetKeyValue( "startburied", GetConVarNumber( "npcg_rollermineburied" ) )
 		self.ent2:SetKeyValue( "spawnflags", tostring( self.kvNum + self.longNum + self.pushNum + self.fadeNum + 4 ) )
@@ -47,7 +55,11 @@ if SERVER then
 		
 		self.ent3 = ents.Create("npc_rollermine")
 		self.ent3:SetPos(self:GetPos() + self:GetForward() * 100 + self:GetRight() * -100)
-		self.ent3:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent3:SetAngles( Angle( 0 , 0 , 0 ) )
+		else
+			self.ent3:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		end
 		--self.ent3:SetHealth( GetConVarNumber("npcg_healthoverride_rollermine") )
 		self.ent3:SetKeyValue( "startburied", GetConVarNumber( "npcg_rollermineburied" ) )
 		self.ent3:SetKeyValue( "spawnflags", tostring( self.kvNum + self.longNum + self.pushNum + self.fadeNum + 4 ) )
@@ -63,27 +75,40 @@ if SERVER then
 		end
 		
 		if GetConVarNumber( "npcg_squad_wakeupall" ) != 0	then	
-			self.ent1:SetKeyValue( "wakesquad", 1 )	
-			self.ent2:SetKeyValue( "wakesquad", 1 )	
-			self.ent3:SetKeyValue( "wakesquad", 1 )	
+			self.ent1:SetKeyValue( "wakesquad", 1 ) 
+			self.ent2:SetKeyValue( "wakesquad", 1 ) 
+			self.ent3:SetKeyValue( "wakesquad", 1 ) 
 		end
-		
-		timer.Simple(0, function()
+
+		timer.Simple( 0 , function( )
+
 			undo.Create( self.PrintName )
-				undo.AddEntity(self)
-				if self.ent1:IsValid() then undo.AddEntity(self.ent1) end
-				if self.ent2:IsValid() then undo.AddEntity(self.ent2) end
-				if self.ent3:IsValid() then undo.AddEntity(self.ent3) end
-				undo.SetCustomUndoText("Undone " .. self.PrintName )
-				undo.SetPlayer(self.Owner)
-			undo.Finish()
-		end)
+
+			undo.AddEntity( self )
+
+			if self.ent1:IsValid( ) then undo.AddEntity( self.ent1 ) end
+			if self.ent2:IsValid( ) then undo.AddEntity( self.ent2 ) end
+			if self.ent3:IsValid( ) then undo.AddEntity( self.ent3 ) end
+			if self.ent4:IsValid( ) then undo.AddEntity( self.ent4 ) end
+			if self.ent5:IsValid( ) then undo.AddEntity( self.ent5 ) end
+
+			undo.SetCustomUndoText( "Undone " .. self.PrintName )
+			undo.SetPlayer( self.Owner )
+
+			undo.Finish( )
+
+		end )
+
 	end
 	function ENT:Think()
 		if !self.ent1:IsValid() then
 			self.ent1 = ents.Create("npc_rollermine")
 			self.ent1:SetPos(self:GetPos())
+			if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent1:SetAngles( Angle( 0 , 0 , 0 ) )
+		else
 			self.ent1:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		end
 			--self.ent1:SetHealth( GetConVarNumber("npcg_healthoverride_rollermine") )
 			self.ent1:SetKeyValue( "startburied", GetConVarNumber( "npcg_rollermineburied" ) )
 			self.ent1:SetKeyValue( "spawnflags", tostring( self.kvNum + self.longNum + self.pushNum + self.fadeNum ) )
@@ -96,7 +121,11 @@ if SERVER then
 		if !self.ent2:IsValid() then
 			self.ent2 = ents.Create("npc_rollermine")
 			self.ent2:SetPos(self:GetPos() + self:GetForward() * 100 + self:GetRight() * 100)
+			if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent2:SetAngles( Angle( 0 , 0 , 0 ) )
+		else
 			self.ent2:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		end
 			--self.ent2:SetHealth( GetConVarNumber("npcg_healthoverride_rollermine") )
 			self.ent2:SetKeyValue( "startburied", GetConVarNumber( "npcg_rollermineburied" ) )
 			self.ent2:SetKeyValue( "spawnflags", tostring( self.kvNum + self.longNum + self.pushNum + self.fadeNum ) )
@@ -109,7 +138,11 @@ if SERVER then
 		if !self.ent3:IsValid() then
 			self.ent3 = ents.Create("npc_rollermine")
 			self.ent3:SetPos(self:GetPos() + self:GetForward() * 100 + self:GetRight() * -100)
+			if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent3:SetAngles( Angle( 0 , 0 , 0 ) )
+		else
 			self.ent3:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		end
 			--self.ent3:SetHealth( GetConVarNumber("npcg_healthoverride_rollermine") )
 			self.ent3:SetKeyValue( "startburied", GetConVarNumber( "npcg_rollermineburied" ) )
 			self.ent3:SetKeyValue( "spawnflags", tostring( self.kvNum + self.longNum + self.pushNum + self.fadeNum ) )
@@ -125,15 +158,15 @@ if SERVER then
 		end
 		
 		if GetConVarNumber( "npcg_squad_wakeupall" ) != 0	then	
-			self.ent1:SetKeyValue( "wakesquad", 1 )	
-			self.ent2:SetKeyValue( "wakesquad", 1 )	
-			self.ent3:SetKeyValue( "wakesquad", 1 )	
+			self.ent1:SetKeyValue( "wakesquad", 1 ) 
+			self.ent2:SetKeyValue( "wakesquad", 1 ) 
+			self.ent3:SetKeyValue( "wakesquad", 1 ) 
 		end
 		self:NextThink(CurTime() + GetConVarNumber("npcg_spawner_wavetime") )
 	end
 	function ENT:OnRemove()
-		if self.ent1 then	self.ent1:Remove()	end
-		if self.ent2 then	self.ent2:Remove()	end
-		if self.ent3 then	self.ent3:Remove()	end
+		if self.ent1 then	self.ent1:Remove() end
+		if self.ent2 then	self.ent2:Remove() end
+		if self.ent3 then	self.ent3:Remove() end
 	end
 end

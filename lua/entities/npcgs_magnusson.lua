@@ -34,7 +34,11 @@ if SERVER then
 		if IsMounted( "ep2" ) then
 			self.ent1 = ents.Create("npc_magnusson")
 			self.ent1:SetPos(self:GetPos())
+			if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent1:SetAngles( Angle( 0 , 0 , 0 ) )
+		else
 			self.ent1:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		end
 			self.ent1:SetKeyValue( "spawnflags", tostring( self.kvNum + self.longNum + self.weaponNum + self.pushNum + self.fadeNum ) )
 			self.ent1:SetKeyValue( "wakeradius", GetConVarNumber( "npcg_wakeradius_human" ) )
 			self.ent1:Spawn()
@@ -43,9 +47,13 @@ if SERVER then
 		else	
 			self.ent1 = ents.Create("npc_citizen")
 			self.ent1:SetPos(self:GetPos())
+			if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent1:SetAngles( Angle( 0 , 0 , 0 ) )
+		else
 			self.ent1:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		end
 			self.ent1:SetKeyValue( "citizentype", math.random(2,3) )
-			if self.randomModel == 0 then	self.ent1:SetModel("models/humans/group03/male_09.mdl" )	end
+			if self.randomModel == 0 then	self.ent1:SetModel("models/humans/group03/male_09.mdl" ) end
 			self.ent1:SetKeyValue( "DontPickupWeapons", GetConVarNumber("npcg_pickupguns") )
 			self.ent1:SetKeyValue( "additionalequipment", table.Random( _WEP ) )
 			self.ent1:SetKeyValue( "Expression Type", "Random" )
@@ -57,11 +65,11 @@ if SERVER then
 		end
 		
 		if GetConVarNumber( "npcg_squad_human" ) != 0	then
-			self.ent1:SetKeyValue( "SquadName", "HumanSquad" )
+			self.ent1:SetKeyValue( "SquadName", "Human" )
 		end
 
 		if GetConVarNumber( "npcg_squad_wakeupall" ) != 0	then	
-			self.ent1:SetKeyValue( "wakesquad", 1 )	
+			self.ent1:SetKeyValue( "wakesquad", 1 ) 
 		end
 
 		if	GetConVarNumber("npcg_accuracy_rebel") >= 4	then

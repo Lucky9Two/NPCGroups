@@ -22,7 +22,11 @@ if SERVER then
 		
 		self.ent1 = ents.Create("npc_rollermine")
 		self.ent1:SetPos(self:GetPos())
-		self.ent1:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent1:SetAngles( Angle( 0 , 0 , 0 ) )
+		else
+			self.ent1:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		end
 		--self.ent1:SetHealth( GetConVarNumber("npcg_healthoverride_rollermine") )
 		self.ent1:SetKeyValue( "startburied", GetConVarNumber( "npcg_rollermineburied" ) )
 		self.ent1:SetKeyValue( "spawnflags", tostring( self.kvNum + self.longNum + self.pushNum + self.fadeNum + 4 ) )
@@ -36,7 +40,7 @@ if SERVER then
 		end
 		
 		if GetConVarNumber( "npcg_squad_wakeupall" ) != 0	then	
-			self.ent1:SetKeyValue( "wakesquad", 1 )	
+			self.ent1:SetKeyValue( "wakesquad", 1 ) 
 		end
 
 		timer.Simple(0, function()

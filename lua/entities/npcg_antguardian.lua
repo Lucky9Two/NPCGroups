@@ -36,7 +36,11 @@ if SERVER then
 			
 		self.ent1 = ents.Create("npc_antlionguard")
 		self.ent1:SetPos(self:GetPos())
-		self.ent1:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent1:SetAngles( Angle( 0 , 0 , 0 ) )
+		else
+			self.ent1:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		end
 		if IsMounted( "ep2" ) then self.ent1:SetMaterial( "models/antlion_guard/antlionguard2" ) end
 		self.ent1:SetKeyValue( "spawnflags", tostring( self.kvNum + self.longNum + self.pushNum + self.fadeNum + self.eludeBurrowNum ) )
 		self.ent1:SetKeyValue( "wakeradius", tostring( self.wakeRadius ) )
@@ -49,7 +53,11 @@ if SERVER then
 		
 		self.ent2 = ents.Create("npc_antlion")
 		self.ent2:SetPos(self:GetPos() + self:GetForward() * -150 + self:GetRight() * 150)
-		self.ent2:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent2:SetAngles( Angle( 0 , 0 , 0 ) )
+		else
+			self.ent2:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		end
 		self.ent2:SetSkin( math.random( 0, 3 ) )
 		self.ent2:SetKeyValue( "spawnflags", tostring( self.kvNum + self.longNum + self.pushNum + self.fadeNum + self.eludeBurrowNum ) )
 		self.ent2:SetKeyValue( "startburrowed", tostring( self.startBurrow )  )
@@ -61,7 +69,11 @@ if SERVER then
 
 		self.ent3 = ents.Create("npc_antlion")
 		self.ent3:SetPos(self:GetPos() + self:GetForward() * -150 + self:GetRight() * -150)
-		self.ent3:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent3:SetAngles( Angle( 0 , 0 , 0 ) )
+		else
+			self.ent3:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		end
 		self.ent3:SetSkin( math.random( 0, 3 ) )
 		self.ent3:SetKeyValue( "spawnflags", tostring( self.kvNum + self.longNum + self.pushNum + self.fadeNum + self.eludeBurrowNum ) )
 		self.ent3:SetKeyValue( "startburrowed", tostring( self.startBurrow )  )
@@ -72,9 +84,13 @@ if SERVER then
 		self.ent3:SetSchedule( SCHED_IDLE_WANDER )
 
 		if IsMounted( "ep2" ) and GetConVarNumber("npcg_squaddies_worker") != 0 then
-			self.ent4 = ents.Create("npc_antlion_worker")	
+			self.ent4 = ents.Create("npc_antlion_worker") 
 			self.ent4:SetPos(self:GetPos() + self:GetForward() * 150 + self:GetRight() * -150)
+			if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent4:SetAngles( Angle( 0 , 0 , 0 ) )
+		else
 			self.ent4:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		end
 			self.ent4:SetKeyValue( "spawnflags", tostring( self.kvNum + self.longNum + self.pushNum + self.fadeNum + self.eludeBurrowNum ) )
 			self.ent4:SetKeyValue( "startburrowed", tostring( self.startBurrow )  )
 			self.ent4:SetKeyValue( "wakeradius", tostring( self.wakeRadius ) )
@@ -83,9 +99,13 @@ if SERVER then
 			self.ent4:Activate()
 			self.ent4:SetSchedule( SCHED_IDLE_WANDER )
 			
-			self.ent5 = ents.Create("npc_antlion_worker")	
+			self.ent5 = ents.Create("npc_antlion_worker") 
 			self.ent5:SetPos(self:GetPos() + self:GetForward() * 150 + self:GetRight() * 150)
+		if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent5:SetAngles( Angle( 0 , 0 , 0 ) )
+		else
 			self.ent5:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		end
 			self.ent5:SetKeyValue( "spawnflags", tostring( self.kvNum + self.longNum + self.pushNum + self.fadeNum + self.eludeBurrowNum ) )
 			self.ent5:SetKeyValue( "startburrowed", tostring( self.startBurrow )  )
 			self.ent5:SetKeyValue( "wakeradius", tostring( self.wakeRadius ) )
@@ -94,9 +114,13 @@ if SERVER then
 			self.ent5:Activate()
 			self.ent5:SetSchedule( SCHED_IDLE_WANDER )
 		else
-			self.ent4 = ents.Create("npc_antlion")		
+			self.ent4 = ents.Create("npc_antlion") 	
 			self.ent4:SetPos(self:GetPos() + self:GetForward() * 150 + self:GetRight() * -150)
+			if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent4:SetAngles( Angle( 0 , 0 , 0 ) )
+		else
 			self.ent4:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		end
 			self.ent4:SetSkin( math.random( 0, 3 ) )
 			self.ent4:SetKeyValue( "spawnflags", tostring( self.kvNum + self.longNum + self.pushNum + self.fadeNum + self.eludeBurrowNum ) )
 			self.ent4:SetKeyValue( "startburrowed", tostring( self.startBurrow )  )
@@ -106,9 +130,13 @@ if SERVER then
 			self.ent4:Activate()
 			self.ent4:SetSchedule( SCHED_IDLE_WANDER )
 			
-			self.ent5 = ents.Create("npc_antlion")		
+			self.ent5 = ents.Create("npc_antlion") 	
 			self.ent5:SetPos(self:GetPos() + self:GetForward() * 150 + self:GetRight() * 150)
+		if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+			self.ent5:SetAngles( Angle( 0 , 0 , 0 ) )
+		else
 			self.ent5:SetAngles( Angle( 0, math.random( 0, 360 ), 0 ) )
+		end
 			self.ent5:SetSkin( math.random( 0, 3 ) )
 			self.ent5:SetKeyValue( "spawnflags", tostring( self.kvNum + self.longNum + self.pushNum + self.fadeNum + self.eludeBurrowNum ) )
 			self.ent5:SetKeyValue( "startburrowed", tostring( self.startBurrow )  )
@@ -120,19 +148,19 @@ if SERVER then
 		end
 
 		if GetConVarNumber( "npcg_squad_antlion" ) != 0	then
-			self.ent1:SetKeyValue( "SquadName", "AntlionSquad" )
-			self.ent2:SetKeyValue( "SquadName", "AntlionSquad" )
-			self.ent3:SetKeyValue( "SquadName", "AntlionSquad" )
-			self.ent4:SetKeyValue( "SquadName", "AntlionSquad" )
-			self.ent5:SetKeyValue( "SquadName", "AntlionSquad" )
+			self.ent1:SetKeyValue( "SquadName", "Antlion" )
+			self.ent2:SetKeyValue( "SquadName", "Antlion" )
+			self.ent3:SetKeyValue( "SquadName", "Antlion" )
+			self.ent4:SetKeyValue( "SquadName", "Antlion" )
+			self.ent5:SetKeyValue( "SquadName", "Antlion" )
 		end
 		
 		if GetConVarNumber( "npcg_squad_wakeupall" ) != 0	then	
-			self.ent1:SetKeyValue( "wakesquad", 1 )	
-			self.ent2:SetKeyValue( "wakesquad", 1 )	
-			self.ent3:SetKeyValue( "wakesquad", 1 )	
-			self.ent4:SetKeyValue( "wakesquad", 1 )	
-			self.ent5:SetKeyValue( "wakesquad", 1 )	
+			self.ent1:SetKeyValue( "wakesquad", 1 ) 
+			self.ent2:SetKeyValue( "wakesquad", 1 ) 
+			self.ent3:SetKeyValue( "wakesquad", 1 ) 
+			self.ent4:SetKeyValue( "wakesquad", 1 ) 
+			self.ent5:SetKeyValue( "wakesquad", 1 ) 
 		end
 
 		timer.Simple(0, function()
