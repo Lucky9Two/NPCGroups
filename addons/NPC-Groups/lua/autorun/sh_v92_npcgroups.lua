@@ -589,5 +589,5 @@ list.Set( "NPC", "npcg_cmbstalker_spawn", {	Name = "Stalker Cluster",	Class = "n
 list.Set( "NPC", "npcg_zmb_crabs_spawn", {	Name = "Headcrab Pack",	Class = "npcg_zmb_crabs_spawn",	Category = Category	} )
 list.Set( "NPC", "npcg_zmb_crabsp_spawn", {	Name = "Poison Crab Pack",	Class = "npcg_zmb_crabsp_spawn",	Category = Category	} )
 list.Set( "NPC", "npcg_cstm_cmbft_spawn",  {	Name = "Custom Combine Fireteam",	Class = "npcg_cstm_cmbft_spawn",	Category = Category	} )
-list.Set( "NPC", "npcg_cstm_cpft_spawn", {	Name = "Custom CP Fireteam",	Class = "npcg_cstm_cpft_spawn",	Category = Category	} )
+-- list.Set( "NPC", "npcg_cstm_cpft_spawn", {	Name = "Custom CP Fireteam",	Class = "npcg_cstm_cpft_spawn",	Category = Category	} )
 list.Set( "NPC", "npcg_cstm_rebft_spawn", {	Name = "Custom Rebel Fireteam",	Class = "npcg_cstm_rebft_spawn",	Category = Category	} )
