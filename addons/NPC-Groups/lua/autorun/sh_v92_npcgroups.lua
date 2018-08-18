@@ -88,7 +88,7 @@ if !ConVarExists( "npcg_squad_antlion" ) then CreateConVar(	"npcg_squad_antlion"
 if !ConVarExists( "npcg_healthoverride_antlion" ) then CreateConVar(	"npcg_healthoverride_antlion",	 	"125",		{	FCVAR_REPLICATED, FCVAR_ARCHIVE }	) end
 if !ConVarExists( "npcg_healthvariant_antlion" ) then CreateConVar(	"npcg_healthvariant_antlion",	 	"0",		{	FCVAR_REPLICATED, FCVAR_ARCHIVE }	) end
 
-local	function NPCGroupsConVars(Panel)
+local function NPCGroupsConVars(Panel)
 	
 	Panel:AddControl(	"Header",		{	Text = "HL2 NPC Ragdoll Settings",	Description = "Standard engine ragdoll settings.\nI can't make these save between map change,\nso use the auto execute files in your GMod folder to set them."	}) 						
 	
@@ -194,160 +194,159 @@ local	function NPCGroupsConVars(Panel)
 	Panel:AddControl(	"Header",		{	Text = "NPCGNotice",	Description = "NPCGroups by NeoTanks\nSteam Workshop Version/Updates by V92\n\nIf you want to make some kind of derivative of this addon, please contact V92! He can help you!"	})
 	
 end
-local 	function NPCGroupsToolMenu() spawnmenu.AddToolMenuOption( "Options", "V92", "NPCGCVars", "NPC Groups", "", "", NPCGroupsConVars) end
+local 	function NPCGroupsToolMenu( ) spawnmenu.AddToolMenuOption( "Options", "V92", "NPCGCVars", "NPC Groups", "", "", NPCGroupsConVars) end
 hook.Add( "PopulateToolMenu", "NPCGroupsToolMenu", NPCGroupsToolMenu)
 --	When I wrote this, there was a need for it, but as of this sentence being written, there are several alternatives you can use. If you really want to use this, Go ahead, just don't upload it anywhere
-local	_CVTOGZMBFYNPC	=	GetConVarNumber( "npcg_zombify_npc" )
-local	function npcgNPCZombification( vic, atk, kil )
-	if _CVTOGZMBFYNPC != 0 then
-		local	_V			=	vic
-		local	_K			=	kil
-		local	_KC			=	kil:GetClass()
-		local	_CMDL		=	{	"models/combine_super_soldier.mdl",	"models/combine_soldier_prisonguard.mdl", "models/combine_soldier.mdl"	}
-		local	_IMDL		=	{	"models/gman.mdl", "models/gman_high.mdl", "models/vortigaunt.mdl", "models/vortigaunt_blue.mdl", "models/vortigaunt_doctor.mdl", "models/vortigaunt_slave.mdl", "models/dog.mdl", "models/hunter.mdl", "models/ministrider.mdl", "models/advisor.mdl", "models/antlion.mdl", "models/antlion_worker.mdl", "models/antlion_guard.mdl", "models/barnacle.mdl", "models/crow.mdl", "models/pigeon.mdl", "models/seagull.mdl",	"models/ichthyosaur.mdl", "models/roller.mdl", "models/combine_turrets/ceiling_turret.mdl", "models/combine_turrets/floor_turret.mdl", "models/combine_turrets/ground_turret.mdl", "models/strider.mdl"	}
-		local	_HDCT		=	{	"npc_headcrab", "npc_headcrab_fast", "npc_headcrab_black"	}
-		local	_HDCS		=	"npc_headcrab"
-		local	_HDCF		=	"npc_headcrab_fast"
-		local	_HDCP		=	"npc_headcrab_black"
-		local	_ZMBS		=	"npc_zombie"
-		local	_ZMBF		=	"npc_fastzombie"
-		local	_ZMBP		=	"npc_poisonzombie"
-		local	_ZMBC		=	"npc_zombine"
-		local	_NPC		=	nil
-		if (_V:IsNPC() and _K:IsNPC()) and not table.HasValue( _IMDL, _V:GetModel() ) and table.GetKeys( _HDCT ) then
-			if GetConVarNumber( "VNT_Debug_Prints" ) != 0 then	print("NPC Zombification - Function Run") end
-			if (_KC == _HDCF or _KC == _HDCS or _KC == _HDCP) and table.HasValue( _CMDL, _V:GetModel() ) then
-				if GetConVarNumber( "VNT_Debug_Prints" ) != 0 then	print("NPC Zombification - Zombine") end
-				_V:Remove()
-				_K:Remove()
-				_NPC = ents.Create(_ZMBC)
-				_NPC:SetPos(_V:GetPos())
-				_NPC:SetAngles( Angle( 0, _V:GetAngles().y, 0 ) )
-				_NPC:Spawn()
-				_NPC:Activate()
-			else
-				if _KC == _HDCS then
-					if GetConVarNumber( "VNT_Debug_Prints" ) != 0 then	print("NPC Zombification - Zombie") end
-					_V:Remove()
-					_K:Remove()
-					_NPC = ents.Create(_ZMBS)
-					_NPC:SetPos(_V:GetPos())
-					_NPC:SetAngles( Angle( 0, _V:GetAngles().y, 0 ) )
-					_NPC:Spawn()
-					_NPC:Activate()
-				end
-				if _KC == _HDCF then
-					if GetConVarNumber( "VNT_Debug_Prints" ) != 0 then	print("NPC Zombification - Fast Zombie") end
-					_V:Remove()
-					_K:Remove()
-					_NPC = ents.Create(_ZMBF)
-					_NPC:SetPos(_V:GetPos())
-					_NPC:SetAngles( Angle( 0, _V:GetAngles().y, 0 ) )
-					_NPC:Spawn()
-					_NPC:Activate()
-				end
-				if _KC == _HDCP then
-					if GetConVarNumber( "VNT_Debug_Prints" ) != 0 then	print("NPC Zombification - Poison Zombie") end
-					_V:Remove()
-					_K:Remove()
-					_NPC = ents.Create(_ZMBP)
-					_NPC:SetPos(_V:GetPos())
-					_NPC:SetAngles( Angle( 0, _V:GetAngles().y, 0 ) )
-					_NPC:Spawn()
-					_NPC:Activate()
-				end
-			end
-		end
-	end
+local function npcgNPCZombification( vic, atk, kil )
+	if GetConVarNumber( "npcg_zombify_npc" ) != 0 then
+		local Victim , Killer , KillerClass = vic , kil , kil:GetClass( )
+		local CombineModel = { "models/combine_super_soldier.mdl", "models/combine_soldier_prisonguard.mdl", "models/combine_soldier.mdl" }
+		local ImmuneModel = { "models/gman.mdl", "models/gman_high.mdl", "models/vortigaunt.mdl", "models/vortigaunt_blue.mdl", "models/vortigaunt_doctor.mdl", "models/vortigaunt_slave.mdl", "models/dog.mdl", "models/hunter.mdl", "models/ministrider.mdl", "models/advisor.mdl", "models/antlion.mdl", "models/antlion_worker.mdl", "models/antlion_guard.mdl", "models/barnacle.mdl", "models/crow.mdl", "models/pigeon.mdl", "models/seagull.mdl",	"models/ichthyosaur.mdl", "models/roller.mdl", "models/combine_turrets/ceiling_turret.mdl", "models/combine_turrets/floor_turret.mdl", "models/combine_turrets/ground_turret.mdl", "models/strider.mdl" }
+		local HeadcrabTable = { "npc_headcrab", "npc_headcrab_fast", "npc_headcrab_black" }
+		local ClassHeadcrab = "npc_headcrab"
+		local ClassHeadcrabFast = "npc_headcrab_fast"
+		local ClassHeadcrabPoison = "npc_headcrab_black"
+		local ClassZombie = "npc_zombie"
+		local ClassZombieFast = "npc_fastzombie"
+		local ClassZombiePoison = "npc_poisonzombie"
+		local ClassZombine = "npc_zombine"
+		local NPC = nil
+		print("NPC Zombification - Function...")
+		if (Victim:IsNPC( ) and Killer:IsNPC( ) ) then
+		
+			print( "NPC Zombification - NPC killed by NPC" )
+		
+			if not table.HasValue( ImmuneModel, Victim:GetModel( ) ) then
 
-	if _CVTOGZMBFYNPC != 0 then
-		hook.Add("OnNPCKilled", "npcgNPCZombification", npcgNPCZombification)
-	else
-		hook.Remove("npcgNPCZombification")
+				print( "NPC Zombification - NPC killed not immune" )
+
+				if table.HasValue( HeadcrabTable , KillerClass ) then
+					
+					print( "NPC Zombification - NPC Killer headcrab class" )
+
+					if (KillerClass == ClassHeadcrabFast or KillerClass == ClassHeadcrab or KillerClass == ClassHeadcrabPoison) and table.HasValue( CombineModel, Victim:GetModel( ) ) then
+						print("NPC Zombification - Zombine")
+						Victim:Remove( )
+						Killer:Remove( )
+						NPC = ents.Create(ClassZombine)
+						NPC:SetPos(Victim:GetPos( ))
+						NPC:SetAngles( Angle( 0, Victim:GetAngles( ).y, 0 ) )
+						NPC:Spawn( )
+						NPC:Activate( )
+					else
+						if KillerClass == ClassHeadcrab then
+							print("NPC Zombification - Zombie")
+							Victim:Remove( )
+							Killer:Remove( )
+							NPC = ents.Create(ClassZombie)
+							NPC:SetPos(Victim:GetPos( ))
+							NPC:SetAngles( Angle( 0, Victim:GetAngles( ).y, 0 ) )
+							NPC:Spawn( )
+							NPC:Activate( )
+						end
+						if KillerClass == ClassHeadcrabFast then
+							print("NPC Zombification - Fast Zombie")
+							Victim:Remove( )
+							Killer:Remove( )
+							NPC = ents.Create(ClassZombieFast)
+							NPC:SetPos(Victim:GetPos( ))
+							NPC:SetAngles( Angle( 0, Victim:GetAngles( ).y, 0 ) )
+							NPC:Spawn( )
+							NPC:Activate( )
+						end
+						if KillerClass == ClassHeadcrabPoison then
+							print("NPC Zombification - Poison Zombie")
+							Victim:Remove( )
+							Killer:Remove( )
+							NPC = ents.Create(ClassZombiePoison)
+							NPC:SetPos(Victim:GetPos( ))
+							NPC:SetAngles( Angle( 0, Victim:GetAngles( ).y, 0 ) )
+							NPC:Spawn( )
+							NPC:Activate( )
+						end
+					end
+
+				end
+
+			end
+
+		end
+
 	end
+	print("NPC Zombification - Function Loaded")
 
 end
+hook.Add("OnNPCKilled", "npcgNPCZombification", npcgNPCZombification)
 
-local _CVTOGZMBFYPLY = GetConVarNumber( "npcg_zombify_ply" )
 local function npcgPLYZombification( vic, atk, kil )
-	if _CVTOGZMBFYPLY != 0 then
-		local	_P			=	debug.getregistry().Player
-		local	_V			=	vic
-		local	_K			=	kil
-		local	_KC			=	kil:GetClass()
-		local	_HDCT		=	{	"npc_headcrab", "npc_headcrab_fast", "npc_headcrab_black"	}
-		local	_HDCS		=	"npc_headcrab"
-		local	_HDCF		=	"npc_headcrab_fast"
-		local	_HDCP		=	"npc_headcrab_black"
-		local	_ZMBS		=	"npc_zombie"
-		local	_ZMBF		=	"npc_fastzombie"
-		local	_ZMBP		=	"npc_poisonzombie"
-		local	_NPC		=	nil
-		if !_V:IsNPC() and table.GetKeys( _HDCT ) then
-			if _KC == _HDCS then
-				if GetConVarNumber( "VNT_Debug_Prints" ) != 0 then	print("Player Zombification - Zombie") end
-				_V:GetRagdollEntity():Remove()
-				_K:Remove()
-				_NPC = ents.Create(_ZMBS)
-				_NPC:SetPos(_V:GetPos())
-				_NPC:SetAngles( Angle( 0, _V:GetAngles().y, 0 ) )
-				_NPC:Spawn()
-				_NPC:Activate()
+	if GetConVarNumber( "npcg_zombify_ply" ) != 0 then
+		local _P = debug.getregistry( ).Player
+		local Victim = vic
+		local Killer = kil
+		local KillerClass = kil:GetClass( )
+		local HeadcrabTable = { "npc_headcrab", "npc_headcrab_fast", "npc_headcrab_black" }
+		local ClassHeadcrab = "npc_headcrab"
+		local ClassHeadcrabFast = "npc_headcrab_fast"
+		local ClassHeadcrabPoison = "npc_headcrab_black"
+		local ClassZombie = "npc_zombie"
+		local ClassZombieFast = "npc_fastzombie"
+		local ClassZombiePoison = "npc_poisonzombie"
+		local NPC = nil
+		if Victim:IsPlayer( ) and table.GetKeys( HeadcrabTable ) then
+			if KillerClass == ClassHeadcrab then
+				print("Player Zombification - Zombie")
+				Victim:GetRagdollEntity( ):Remove( )
+				Killer:Remove( )
+				NPC = ents.Create(ClassZombie)
+				NPC:SetPos(Victim:GetPos( ))
+				NPC:SetAngles( Angle( 0, Victim:GetAngles( ).y, 0 ) )
+				NPC:Spawn( )
+				NPC:Activate( )
 			end
-			if _KC == _HDCF then
-				if GetConVarNumber( "VNT_Debug_Prints" ) != 0 then	print("Player Zombification - Fast Zombie") end
-				_V:GetRagdollEntity():Remove()
-				_K:Remove()
-				_NPC = ents.Create(_ZMBF)
-				_NPC:SetPos(_V:GetPos())
-				_NPC:SetAngles( Angle( 0, _V:GetAngles().y, 0 ) )
-				_NPC:Spawn()
-				_NPC:Activate()
+			if KillerClass == ClassHeadcrabFast then
+				print("Player Zombification - Fast Zombie")
+				Victim:GetRagdollEntity( ):Remove( )
+				Killer:Remove( )
+				NPC = ents.Create(ClassZombieFast)
+				NPC:SetPos(Victim:GetPos( ))
+				NPC:SetAngles( Angle( 0, Victim:GetAngles( ).y, 0 ) )
+				NPC:Spawn( )
+				NPC:Activate( )
 			end
-			if _KC == _HDCP then
-				if GetConVarNumber( "VNT_Debug_Prints" ) != 0 then	print("Player Zombification - Poison Zombie") end
-				_V:GetRagdollEntity():Remove()
-				_K:Remove()
-				_NPC = ents.Create(_ZMBP)
-				_NPC:SetPos(_V:GetPos())
-				_NPC:SetAngles( Angle( 0, _V:GetAngles().y, 0 ) )
-				_NPC:Spawn()
-				_NPC:Activate()
+			if KillerClass == ClassHeadcrabPoison then
+				print("Player Zombification - Poison Zombie")
+				Victim:GetRagdollEntity( ):Remove( )
+				Killer:Remove( )
+				NPC = ents.Create(ClassZombiePoison)
+				NPC:SetPos(Victim:GetPos( ))
+				NPC:SetAngles( Angle( 0, Victim:GetAngles( ).y, 0 ) )
+				NPC:Spawn( )
+				NPC:Activate( )
 			end
 		end
 	end
 
-	if _CVTOGZMBFYNPC != 0 then
-		hook.Add("PlayerDeath", "npcgPLYZombification", npcgPLYZombification)
-	else
-		hook.Remove("npcgPLYZombification")
-	end
-
 end
+hook.Add("PlayerDeath", "npcgPLYZombification", npcgPLYZombification)
 
-local	function NPCGroupsSpawn( _P, _NPC )
-	local	_CVTOGCSTMMDLCMB	=	GetConVarString("npcg_custom_model_combine")
-	local	_CVTOGCSTMMDLREB	=	GetConVarString("npcg_custom_model_rebel")
-	local	_CVTOGCSTMMDLCP		=	GetConVarString("npcg_custom_model_cp")
+local function NPCGroupsSpawn( _P, NPC )
 	
-	if _NPC == ("npcg_cstm_cmbft" or "npcg_cstm_cmbft_spawn") and not file.Exists( (_CVTOGCSTMMDLCMB), "GAME")then
+	if NPC == ("npcg_cstm_cmbft" or "npcg_cstm_cmbft_spawn") and not file.Exists( (GetConVarString("npcg_custom_model_combine")), "GAME")then
 		_P:ChatPrint("Non-existent model!\nProper usage:\n    npcg_custom_model_combine \"models/combine_super_soldier.mdl\"")
-		--_NPC:Remove()
 		return false
 	end
-	if _NPC == ("npcg_cstm_rebft" or "npcg_cstm_rebft_spawn") and !file.Exists( (_CVTOGCSTMMDLREB), "GAME") then
-		--_NPC:Remove()
+	if NPC == ("npcg_cstm_rebft" or "npcg_cstm_rebft_spawn") and !file.Exists( (GetConVarString("npcg_custom_model_rebel")), "GAME") then
 		_P:ChatPrint("Non-existent model!\nProper usage:\n    npcg_custom_model_rebel \"models/humans/group01/male01.mdl\"")
 		return false
 	end
-	if _NPC == ("npcg_cstm_cpft" or "npcg_cstm_cpft_spawn") and !file.Exists( (_CVTOGCSTMMDLCP), "GAME") then
-		--_NPC:Remove()
-		_P:ChatPrint("Non-existent model!\nProper usage:\n    npcg_custom_model_cp \"models/police.mdl\"")
-		return false
-	end
+	-- if NPC == ("npcg_cstm_cpft" or "npcg_cstm_cpft_spawn") and !file.Exists( (GetConVarString("npcg_custom_model_cp")), "GAME") then
+		-- _P:ChatPrint("Non-existent model!\nProper usage:\n    npcg_custom_model_cp \"models/police.mdl\"")
+		-- return false
+	-- end
+
 end
 hook.Add("PlayerSpawnNPC", "NPCGroupsSpawn", NPCGroupsSpawn)
-local	function NPCGroupsSpawned( _P, _NPC ) _NPC.Owner = _P	end
+local function NPCGroupsSpawned( _P, NPC ) NPC.Owner = _P	end
 hook.Add("PlayerSpawnedNPC", "NPCGroupsSpawned", NPCGroupsSpawned)
 -------------------------------------------------------
 -------------------------------------------------------
