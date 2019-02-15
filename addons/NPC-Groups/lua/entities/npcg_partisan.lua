@@ -15,12 +15,13 @@ ENT.AdminOnly = false
 local WeaponTbl = { "weapon_smg1" , "weapon_pistol" }
 
 if SERVER then
+
 	function ENT:Initialize( )
-		if ConVarExists( "npcg_random_rebels" ) and GetConVarNumber( "npcg_random_rebels" ) != 0 then self.randomModel = 1 else self.randomModel = 0	end
-		if ConVarExists( "npcg_weapondrop" ) and GetConVarNumber( "npcg_weapondrop" ) != 0 then self.weaponNum = 8192 else self.weaponNum = 0	end
-		if ConVarExists( "npcg_ignorepushing" ) and GetConVarNumber( "npcg_ignorepushing" ) != 0 then self.pushNum = 16384 else self.pushNum = 0	end
-		if ConVarExists( "npcg_fade_corpse" ) and GetConVarNumber( "npcg_fade_corpse" ) != 0 then self.fadeNum = 512 else self.fadeNum = 0	end
-		if ConVarExists( "npcg_longvision" ) and GetConVarNumber( "npcg_longvision" ) != 0 then self.longNum = 256 else self.longNum = 0	end
+		if ConVarExists( "npcg_random_rebels" ) and GetConVarNumber( "npcg_random_rebels" ) != 0 then self.randomModel = 1 else self.randomModel = 0 end
+		if ConVarExists( "npcg_weapondrop" ) and GetConVarNumber( "npcg_weapondrop" ) != 0 then self.weaponNum = 8192 else self.weaponNum = 0 end
+		if ConVarExists( "npcg_ignorepushing" ) and GetConVarNumber( "npcg_ignorepushing" ) != 0 then self.pushNum = 16384 else self.pushNum = 0 end
+		if ConVarExists( "npcg_fade_corpse" ) and GetConVarNumber( "npcg_fade_corpse" ) != 0 then self.fadeNum = 512 else self.fadeNum = 0 end
+		if ConVarExists( "npcg_longvision" ) and GetConVarNumber( "npcg_longvision" ) != 0 then self.longNum = 256 else self.longNum = 0 end
 		self.kvNum = 0
 		
 		self.ent1 = ents.Create( "npc_citizen" )
@@ -89,67 +90,83 @@ if SERVER then
 		self.ent5:SetSchedule( SCHED_IDLE_WANDER )
 
 		if GetConVarNumber( "npcg_squad_human" ) != 0 then
+
 			self.ent1:SetKeyValue( "SquadName" , "Human" )
 			self.ent2:SetKeyValue( "SquadName" , "Human" )
 			self.ent3:SetKeyValue( "SquadName" , "Human" )
 			self.ent4:SetKeyValue( "SquadName" , "Human" )
 			self.ent5:SetKeyValue( "SquadName" , "Human" )
+
 		end
-		
-		if GetConVarNumber( "npcg_squad_wakeupall" ) != 0 then 
-			self.ent1:SetKeyValue( "wakesquad" , 1 ) 
+
+		if GetConVarNumber( "npcg_squad_wakeupall" ) != 0 then
+
+			self.ent1:SetKeyValue( "wakesquad" , 1 )
 			self.ent2:SetKeyValue( "wakesquad" , 1 ) 
 			self.ent3:SetKeyValue( "wakesquad" , 1 ) 
 			self.ent4:SetKeyValue( "wakesquad" , 1 ) 
-			self.ent5:SetKeyValue( "wakesquad" , 1 ) 
-		end
+			self.ent5:SetKeyValue( "wakesquad" , 1 )
+
+	end
 		if	GetConVarNumber( "npcg_accuracy_citizen" ) >= 4 then
-			self.ent1:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_PERFECT)
-			self.ent2:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_PERFECT)
-			self.ent3:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_PERFECT)
-			self.ent4:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_PERFECT)
-			self.ent5:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_PERFECT)
+
+			self.ent1:SetCurrentWeaponProficiency( WEAPON_PROFICIENCY_PERFECT )
+			self.ent2:SetCurrentWeaponProficiency( WEAPON_PROFICIENCY_PERFECT )
+			self.ent3:SetCurrentWeaponProficiency( WEAPON_PROFICIENCY_PERFECT )
+			self.ent4:SetCurrentWeaponProficiency( WEAPON_PROFICIENCY_PERFECT )
+			self.ent5:SetCurrentWeaponProficiency( WEAPON_PROFICIENCY_PERFECT )
+
 		elseif	GetConVarNumber( "npcg_accuracy_citizen" ) == 3 then
-			self.ent1:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_VERY_GOOD)
-			self.ent2:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_VERY_GOOD)
-			self.ent3:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_VERY_GOOD)
-			self.ent4:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_VERY_GOOD)
-			self.ent5:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_VERY_GOOD)
+
+			self.ent1:SetCurrentWeaponProficiency( WEAPON_PROFICIENCY_VERY_GOOD )
+			self.ent2:SetCurrentWeaponProficiency( WEAPON_PROFICIENCY_VERY_GOOD )
+			self.ent3:SetCurrentWeaponProficiency( WEAPON_PROFICIENCY_VERY_GOOD )
+			self.ent4:SetCurrentWeaponProficiency( WEAPON_PROFICIENCY_VERY_GOOD )
+			self.ent5:SetCurrentWeaponProficiency( WEAPON_PROFICIENCY_VERY_GOOD )
+
 		elseif	GetConVarNumber( "npcg_accuracy_citizen" ) == 2 then
-			self.ent1:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_GOOD)
-			self.ent2:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_GOOD)
-			self.ent3:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_GOOD)
-			self.ent4:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_GOOD)
-			self.ent5:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_GOOD)
+
+			self.ent1:SetCurrentWeaponProficiency( WEAPON_PROFICIENCY_GOOD )
+			self.ent2:SetCurrentWeaponProficiency( WEAPON_PROFICIENCY_GOOD )
+			self.ent3:SetCurrentWeaponProficiency( WEAPON_PROFICIENCY_GOOD )
+			self.ent4:SetCurrentWeaponProficiency( WEAPON_PROFICIENCY_GOOD )
+			self.ent5:SetCurrentWeaponProficiency( WEAPON_PROFICIENCY_GOOD )
+
 		elseif	GetConVarNumber( "npcg_accuracy_citizen" ) == 1 then
-			self.ent1:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_AVERAGE)
-			self.ent2:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_AVERAGE)
-			self.ent3:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_AVERAGE)
-			self.ent4:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_AVERAGE)
-			self.ent5:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_AVERAGE)
+
+			self.ent1:SetCurrentWeaponProficiency( WEAPON_PROFICIENCY_AVERAGE )
+			self.ent2:SetCurrentWeaponProficiency( WEAPON_PROFICIENCY_AVERAGE )
+			self.ent3:SetCurrentWeaponProficiency( WEAPON_PROFICIENCY_AVERAGE )
+			self.ent4:SetCurrentWeaponProficiency( WEAPON_PROFICIENCY_AVERAGE )
+			self.ent5:SetCurrentWeaponProficiency( WEAPON_PROFICIENCY_AVERAGE )
+
 		else
-			self.ent1:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_POOR)
-			self.ent2:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_POOR)
-			self.ent3:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_POOR)
-			self.ent4:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_POOR)
-			self.ent5:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_POOR) 	
+			self.ent1:SetCurrentWeaponProficiency( WEAPON_PROFICIENCY_POOR )
+			self.ent2:SetCurrentWeaponProficiency( WEAPON_PROFICIENCY_POOR )
+			self.ent3:SetCurrentWeaponProficiency( WEAPON_PROFICIENCY_POOR )
+			self.ent4:SetCurrentWeaponProficiency( WEAPON_PROFICIENCY_POOR )
+			self.ent5:SetCurrentWeaponProficiency( WEAPON_PROFICIENCY_POOR ) 	
 		end
 
 		if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
-			self.ent1:SetAngles( Angle( 0 , 0 , 0 ) ) 
-			self.ent2:SetAngles( Angle( 0 , 0 , 0 ) ) 
+
+			self.ent1:SetAngles( Angle( 0 , 0 , 0 ) )
+			self.ent2:SetAngles( Angle( 0 , 0 , 0 ) )
 			self.ent3:SetAngles( Angle( 0 , 0 , 0 ) ) 
 			self.ent4:SetAngles( Angle( 0 , 0 , 0 ) ) 
-			self.ent5:SetAngles( Angle( 0 , 0 , 0 ) ) 
+			self.ent5:SetAngles( Angle( 0 , 0 , 0 ) )
+
 		else
-			self.ent1:SetAngles( Angle( 0 , math.random( 0 , 360 ) , 0 ) ) 
-			self.ent2:SetAngles( Angle( 0 , math.random( 0 , 360 ) , 0 ) ) 
+			self.ent1:SetAngles( Angle( 0 , math.random( 0 , 360 ) , 0 ) )
+			self.ent2:SetAngles( Angle( 0 , math.random( 0 , 360 ) , 0 ) )
 			self.ent3:SetAngles( Angle( 0 , math.random( 0 , 360 ) , 0 ) ) 
 			self.ent4:SetAngles( Angle( 0 , math.random( 0 , 360 ) , 0 ) ) 
-			self.ent5:SetAngles( Angle( 0 , math.random( 0 , 360 ) , 0 ) ) 
+			self.ent5:SetAngles( Angle( 0 , math.random( 0 , 360 ) , 0 ) )
+
 		end
 
 		timer.Simple( 0 , function( )
+
 			undo.Create( self.PrintName )
 				if self.ent1:IsValid( ) then undo.AddEntity( self.ent1 ) end
 				if self.ent2:IsValid( ) then undo.AddEntity( self.ent2 ) end
@@ -161,6 +178,8 @@ if SERVER then
 			undo.Finish( )
 			self:Remove( )
 		end)
+
 	end
+
 end
 

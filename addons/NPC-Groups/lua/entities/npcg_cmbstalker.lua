@@ -13,11 +13,12 @@ ENT.Spawnable = false
 ENT.AdminOnly = false
 
 if SERVER then
+
 	function ENT:Initialize( )
 
-		if ConVarExists( "npcg_ignorepushing" ) and GetConVarNumber( "npcg_ignorepushing" ) != 0 then self.pushNum = 16384 else self.pushNum = 0	end
-		if ConVarExists( "npcg_fade_corpse" ) and GetConVarNumber( "npcg_fade_corpse" ) != 0 then self.fadeNum = 512 else self.fadeNum = 0	end
-		if ConVarExists( "npcg_longvision" ) and GetConVarNumber( "npcg_longvision" ) != 0 then self.longNum = 256 else self.longNum = 0	end
+		if ConVarExists( "npcg_ignorepushing" ) and GetConVarNumber( "npcg_ignorepushing" ) != 0 then self.pushNum = 16384 else self.pushNum = 0 end
+		if ConVarExists( "npcg_fade_corpse" ) and GetConVarNumber( "npcg_fade_corpse" ) != 0 then self.fadeNum = 512 else self.fadeNum = 0 end
+		if ConVarExists( "npcg_longvision" ) and GetConVarNumber( "npcg_longvision" ) != 0 then self.longNum = 256 else self.longNum = 0 end
 
 		self.kvNum = 0
 
@@ -49,41 +50,55 @@ if SERVER then
 		self.ent3:SetSchedule( SCHED_IDLE_WANDER )
 		
 		if GetConVarNumber( "npcg_squad_combine" ) != 0 then
+
 			self.ent1:SetKeyValue( "SquadName" , "Combine" )
 			self.ent2:SetKeyValue( "SquadName" , "Combine" )
 			self.ent3:SetKeyValue( "SquadName" , "Combine" )
+
 		end
 
 		if GetConVarNumber( "npcg_accuracy_cmbstalker" ) >= 4 then
-			self.ent1:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_PERFECT)
-			self.ent2:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_PERFECT)
-			self.ent3:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_PERFECT)
+
+			self.ent1:SetCurrentWeaponProficiency( WEAPON_PROFICIENCY_PERFECT )
+			self.ent2:SetCurrentWeaponProficiency( WEAPON_PROFICIENCY_PERFECT )
+			self.ent3:SetCurrentWeaponProficiency( WEAPON_PROFICIENCY_PERFECT )
+
 		elseif GetConVarNumber( "npcg_accuracy_cmbstalker" ) == 3 then
-			self.ent1:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_VERY_GOOD)
-			self.ent2:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_VERY_GOOD)
-			self.ent3:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_VERY_GOOD)
+
+			self.ent1:SetCurrentWeaponProficiency( WEAPON_PROFICIENCY_VERY_GOOD )
+			self.ent2:SetCurrentWeaponProficiency( WEAPON_PROFICIENCY_VERY_GOOD )
+			self.ent3:SetCurrentWeaponProficiency( WEAPON_PROFICIENCY_VERY_GOOD )
+
 		elseif GetConVarNumber( "npcg_accuracy_cmbstalker" ) == 2 then
-			self.ent1:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_GOOD)
-			self.ent2:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_GOOD)
-			self.ent3:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_GOOD)
+
+			self.ent1:SetCurrentWeaponProficiency( WEAPON_PROFICIENCY_GOOD )
+			self.ent2:SetCurrentWeaponProficiency( WEAPON_PROFICIENCY_GOOD )
+			self.ent3:SetCurrentWeaponProficiency( WEAPON_PROFICIENCY_GOOD )
+
 		elseif GetConVarNumber( "npcg_accuracy_cmbstalker" ) == 1 then
-			self.ent1:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_AVERAGE) 
-			self.ent2:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_AVERAGE) 
-			self.ent3:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_AVERAGE) 
+
+			self.ent1:SetCurrentWeaponProficiency( WEAPON_PROFICIENCY_AVERAGE )
+			self.ent2:SetCurrentWeaponProficiency( WEAPON_PROFICIENCY_AVERAGE ) 
+			self.ent3:SetCurrentWeaponProficiency( WEAPON_PROFICIENCY_AVERAGE )
+
 		else
-			self.ent1:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_POOR) 
-			self.ent2:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_POOR) 
-			self.ent3:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_POOR) 
+			self.ent1:SetCurrentWeaponProficiency( WEAPON_PROFICIENCY_POOR )
+			self.ent2:SetCurrentWeaponProficiency( WEAPON_PROFICIENCY_POOR ) 
+			self.ent3:SetCurrentWeaponProficiency( WEAPON_PROFICIENCY_POOR )
+
 		end
 
 		if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
-			self.ent1:SetAngles( Angle( 0 , 0 , 0 ) ) 
-			self.ent2:SetAngles( Angle( 0 , 0 , 0 ) ) 
-			self.ent3:SetAngles( Angle( 0 , 0 , 0 ) ) 
+
+			self.ent1:SetAngles( Angle( 0 , 0 , 0 ) )
+			self.ent2:SetAngles( Angle( 0 , 0 , 0 ) )
+			self.ent3:SetAngles( Angle( 0 , 0 , 0 ) )
+
 		else
-			self.ent1:SetAngles( Angle( 0 , math.random( 0 , 360 ) , 0 ) ) 
-			self.ent2:SetAngles( Angle( 0 , math.random( 0 , 360 ) , 0 ) ) 
-			self.ent3:SetAngles( Angle( 0 , math.random( 0 , 360 ) , 0 ) ) 
+			self.ent1:SetAngles( Angle( 0 , math.random( 0 , 360 ) , 0 ) )
+			self.ent2:SetAngles( Angle( 0 , math.random( 0 , 360 ) , 0 ) )
+			self.ent3:SetAngles( Angle( 0 , math.random( 0 , 360 ) , 0 ) )
+
 		end
 
 		self.ent1:AddRelationship( "player D_HT 200" )
@@ -99,6 +114,9 @@ if SERVER then
 				undo.SetPlayer( self.Owner)
 			undo.Finish( )
 			self:Remove( )
-		end)
+
+		end )
+
 	end
+
 end

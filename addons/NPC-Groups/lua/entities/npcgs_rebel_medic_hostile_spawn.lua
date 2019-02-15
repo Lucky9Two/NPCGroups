@@ -22,14 +22,14 @@ if SERVER then
 		self:SetNotSolid( true )
 
 		local rebSupplyDiceRoll = math.random( 1 , GetConVarNumber( "npcg_rebelresupplychance" ) )
-		if rebSupplyDiceRoll == 1 then self.resupplyChance = 524288 else self.resupplyChance = 0	end
+		if rebSupplyDiceRoll == 1 then self.resupplyChance = 524288 else self.resupplyChance = 0 end
 		--print( "Rebel Supply Dice Roll is " .. rebSupplyDiceRoll )
 		
-		if GetConVarNumber( "npcg_ignorepushing" ) != 0 then self.pushNum = 16384 else self.pushNum = 0	end
-		if GetConVarNumber( "npcg_weapondrop" ) != 0 then self.weaponNum = 8192 else self.weaponNum = 0	end
-		if GetConVarNumber( "npcg_fade_corpse" ) != 0 then self.fadeNum = 512 else self.fadeNum = 0	end
-		if GetConVarNumber( "npcg_longvision" ) != 0 then self.longNum = 256 else self.longNum = 0	end
-		if GetConVarNumber( "npcg_random_rebels" ) != 0 then self.randomModel = 1 else self.randomModel = 0	end
+		if GetConVarNumber( "npcg_ignorepushing" ) != 0 then self.pushNum = 16384 else self.pushNum = 0 end
+		if GetConVarNumber( "npcg_weapondrop" ) != 0 then self.weaponNum = 8192 else self.weaponNum = 0 end
+		if GetConVarNumber( "npcg_fade_corpse" ) != 0 then self.fadeNum = 512 else self.fadeNum = 0 end
+		if GetConVarNumber( "npcg_longvision" ) != 0 then self.longNum = 256 else self.longNum = 0 end
+		if GetConVarNumber( "npcg_random_rebels" ) != 0 then self.randomModel = 1 else self.randomModel = 0 end
 		
 		self.kvNum = 0
 		
@@ -47,31 +47,47 @@ if SERVER then
 		self.ent1:SetSchedule( SCHED_IDLE_WANDER )
 		
 		if GetConVarNumber( "npcg_squad_human" ) != 0 then
+
 			self.ent1:SetKeyValue( "SquadName" , "Human" )
+
 		end
 
-		if GetConVarNumber( "npcg_squad_wakeupall" ) != 0 then 
-			self.ent1:SetKeyValue( "wakesquad" , 1 ) 
-		end
+		if GetConVarNumber( "npcg_squad_wakeupall" ) != 0 then
+
+			self.ent1:SetKeyValue( "wakesquad" , 1 )
+
+	end
 
 		if	GetConVarNumber( "npcg_accuracy_rebel" ) >= 4 then
-			self.ent1:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_PERFECT)
+
+			self.ent1:SetCurrentWeaponProficiency( WEAPON_PROFICIENCY_PERFECT )
+
 		elseif	GetConVarNumber( "npcg_accuracy_rebel" ) == 3 then
-			self.ent1:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_VERY_GOOD)
+
+			self.ent1:SetCurrentWeaponProficiency( WEAPON_PROFICIENCY_VERY_GOOD )
+
 		elseif	GetConVarNumber( "npcg_accuracy_rebel" ) == 2 then
-			self.ent1:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_GOOD)
+
+			self.ent1:SetCurrentWeaponProficiency( WEAPON_PROFICIENCY_GOOD )
+
 		elseif	GetConVarNumber( "npcg_accuracy_rebel" ) == 1 then
-			self.ent1:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_AVERAGE)
+
+			self.ent1:SetCurrentWeaponProficiency( WEAPON_PROFICIENCY_AVERAGE )
+
 		else
-			self.ent1:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_POOR)
-		end
+			self.ent1:SetCurrentWeaponProficiency( WEAPON_PROFICIENCY_POOR )
+
+	end
 
 		self.ent1:AddRelationship( "player D_HT 200" )
 
 		if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
-			self.ent1:SetAngles( Angle( 0 , 0 , 0 ) ) 
+
+			self.ent1:SetAngles( Angle( 0 , 0 , 0 ) )
+
 		else
-			self.ent1:SetAngles( Angle( 0 , math.random( 0 , 360 ) , 0 ) ) 
+			self.ent1:SetAngles( Angle( 0 , math.random( 0 , 360 ) , 0 ) )
+
 		end
 
 		timer.Simple( 0 , function( )
@@ -107,37 +123,37 @@ if SERVER then
 			self.ent1:Spawn( )
 			self.ent1:Activate( )
 			self.ent1:SetSchedule( SCHED_IDLE_WANDER )
+			
+			if GetConVarNumber( "npcg_squad_human" ) != 0 then
+				self.ent1:SetKeyValue( "SquadName" , "Human" )
+			end
 
-		end
-		
-		if GetConVarNumber( "npcg_squad_human" ) != 0 then
-			self.ent1:SetKeyValue( "SquadName" , "Human" )
-		end
+			if GetConVarNumber( "npcg_squad_wakeupall" ) != 0 then 
+				self.ent1:SetKeyValue( "wakesquad" , 1 ) 
+			end
 
-		if GetConVarNumber( "npcg_squad_wakeupall" ) != 0 then 
-			self.ent1:SetKeyValue( "wakesquad" , 1 ) 
-		end
-
-		if	GetConVarNumber( "npcg_accuracy_rebel" ) >= 4 then
-			self.ent1:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_PERFECT)
-		elseif	GetConVarNumber( "npcg_accuracy_rebel" ) == 3 then
-			self.ent1:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_VERY_GOOD)
-		elseif	GetConVarNumber( "npcg_accuracy_rebel" ) == 2 then
-			self.ent1:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_GOOD)
-		elseif	GetConVarNumber( "npcg_accuracy_rebel" ) == 1 then
-			self.ent1:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_AVERAGE)
-		else
-			self.ent1:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_POOR)
+			if	GetConVarNumber( "npcg_accuracy_rebel" ) >= 4 then
+				self.ent1:SetCurrentWeaponProficiency( WEAPON_PROFICIENCY_PERFECT )
+			elseif	GetConVarNumber( "npcg_accuracy_rebel" ) == 3 then
+				self.ent1:SetCurrentWeaponProficiency( WEAPON_PROFICIENCY_VERY_GOOD )
+			elseif	GetConVarNumber( "npcg_accuracy_rebel" ) == 2 then
+				self.ent1:SetCurrentWeaponProficiency( WEAPON_PROFICIENCY_GOOD )
+			elseif	GetConVarNumber( "npcg_accuracy_rebel" ) == 1 then
+				self.ent1:SetCurrentWeaponProficiency( WEAPON_PROFICIENCY_AVERAGE )
+			else
+				self.ent1:SetCurrentWeaponProficiency( WEAPON_PROFICIENCY_POOR )
 		end
 
-		self.ent1:AddRelationship( "player D_HT 200" )
-		
-		if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
-			self.ent1:SetAngles( Angle( 0 , 0 , 0 ) ) 
-		else
-			self.ent1:SetAngles( Angle( 0 , math.random( 0 , 360 ) , 0 ) ) 
+			self.ent1:AddRelationship( "player D_HT 200" )
+			
+			if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+				self.ent1:SetAngles( Angle( 0 , 0 , 0 ) ) 
+			else
+				self.ent1:SetAngles( Angle( 0 , math.random( 0 , 360 ) , 0 ) ) 
 		end
 
 	end
+
 end
 
+end

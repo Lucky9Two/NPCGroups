@@ -19,10 +19,10 @@ if SERVER then
 		self:SetNoDraw( true )
 		self:SetNotSolid( true )
 
-		if ConVarExists( "npcg_weapondrop" ) and GetConVarNumber( "npcg_weapondrop" ) != 0 then self.weaponNum = 8192 else self.weaponNum = 0	end
-		if GetConVarNumber( "npcg_ignorepushing" ) != 0 then self.pushNum = 16384 else self.pushNum = 0	end
-		if GetConVarNumber( "npcg_fade_corpse" ) != 0 then self.fadeNum = 512 else self.fadeNum = 0	end
-		if GetConVarNumber( "npcg_longvision" ) != 0 then self.longNum = 256 else self.longNum = 0	end
+		if ConVarExists( "npcg_weapondrop" ) and GetConVarNumber( "npcg_weapondrop" ) != 0 then self.weaponNum = 8192 else self.weaponNum = 0 end
+		if GetConVarNumber( "npcg_ignorepushing" ) != 0 then self.pushNum = 16384 else self.pushNum = 0 end
+		if GetConVarNumber( "npcg_fade_corpse" ) != 0 then self.fadeNum = 512 else self.fadeNum = 0 end
+		if GetConVarNumber( "npcg_longvision" ) != 0 then self.longNum = 256 else self.longNum = 0 end
 		
 		self.kvNum = 0
 		
@@ -35,28 +35,44 @@ if SERVER then
 		self.ent1:SetSchedule( SCHED_IDLE_WANDER )
 		
 		if GetConVarNumber( "npcg_squad_human" ) != 0 then
+
 			self.ent1:SetKeyValue( "SquadName" , "Human" )
-		end
-		
-		if GetConVarNumber( "npcg_squad_wakeupall" ) != 0 then 
-			self.ent1:SetKeyValue( "wakesquad" , 1 ) 
-		end
-		if	GetConVarNumber( "npcg_accuracy_dog" ) >= 4 then
-			self.ent1:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_PERFECT)
-		elseif	GetConVarNumber( "npcg_accuracy_dog" ) == 3 then
-			self.ent1:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_VERY_GOOD)
-		elseif	GetConVarNumber( "npcg_accuracy_dog" ) == 2 then
-			self.ent1:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_GOOD)
-		elseif	GetConVarNumber( "npcg_accuracy_dog" ) == 1 then
-			self.ent1:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_AVERAGE)
-		else
-			self.ent1:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_POOR)
+
 		end
 
-		if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
-			self.ent1:SetAngles( Angle( 0 , 0 , 0 ) ) 
+		if GetConVarNumber( "npcg_squad_wakeupall" ) != 0 then
+
+			self.ent1:SetKeyValue( "wakesquad" , 1 )
+
+	end
+		if	GetConVarNumber( "npcg_accuracy_dog" ) >= 4 then
+
+			self.ent1:SetCurrentWeaponProficiency( WEAPON_PROFICIENCY_PERFECT )
+
+		elseif	GetConVarNumber( "npcg_accuracy_dog" ) == 3 then
+
+			self.ent1:SetCurrentWeaponProficiency( WEAPON_PROFICIENCY_VERY_GOOD )
+
+		elseif	GetConVarNumber( "npcg_accuracy_dog" ) == 2 then
+
+			self.ent1:SetCurrentWeaponProficiency( WEAPON_PROFICIENCY_GOOD )
+
+		elseif	GetConVarNumber( "npcg_accuracy_dog" ) == 1 then
+
+			self.ent1:SetCurrentWeaponProficiency( WEAPON_PROFICIENCY_AVERAGE )
+
 		else
-			self.ent1:SetAngles( Angle( 0 , math.random( 0 , 360 ) , 0 ) ) 
+			self.ent1:SetCurrentWeaponProficiency( WEAPON_PROFICIENCY_POOR )
+
+	end
+
+		if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+
+			self.ent1:SetAngles( Angle( 0 , 0 , 0 ) )
+
+		else
+			self.ent1:SetAngles( Angle( 0 , math.random( 0 , 360 ) , 0 ) )
+
 		end
 
 		timer.Simple( 0 , function( )
@@ -72,7 +88,7 @@ if SERVER then
 
 			undo.Finish( )
 
-		end )
+	end )
 
 	end
 
@@ -87,33 +103,34 @@ if SERVER then
 			self.ent1:Spawn( )
 			self.ent1:Activate( )
 			self.ent1:SetSchedule( SCHED_IDLE_WANDER )
+			
+			if GetConVarNumber( "npcg_squad_human" ) != 0 then
+				self.ent1:SetKeyValue( "SquadName" , "Human" )
+			end
 
+			if GetConVarNumber( "npcg_squad_wakeupall" ) != 0 then 
+				self.ent1:SetKeyValue( "wakesquad" , 1 ) 
 		end
-		
-		if GetConVarNumber( "npcg_squad_human" ) != 0 then
-			self.ent1:SetKeyValue( "SquadName" , "Human" )
-		end
-		
-		if GetConVarNumber( "npcg_squad_wakeupall" ) != 0 then 
-			self.ent1:SetKeyValue( "wakesquad" , 1 ) 
-		end
-		if	GetConVarNumber( "npcg_accuracy_dog" ) >= 4 then
-			self.ent1:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_PERFECT)
-		elseif	GetConVarNumber( "npcg_accuracy_dog" ) == 3 then
-			self.ent1:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_VERY_GOOD)
-		elseif	GetConVarNumber( "npcg_accuracy_dog" ) == 2 then
-			self.ent1:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_GOOD)
-		elseif	GetConVarNumber( "npcg_accuracy_dog" ) == 1 then
-			self.ent1:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_AVERAGE)
-		else
-			self.ent1:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_POOR)
-		end
+			if	GetConVarNumber( "npcg_accuracy_dog" ) >= 4 then
+				self.ent1:SetCurrentWeaponProficiency( WEAPON_PROFICIENCY_PERFECT )
+			elseif	GetConVarNumber( "npcg_accuracy_dog" ) == 3 then
+				self.ent1:SetCurrentWeaponProficiency( WEAPON_PROFICIENCY_VERY_GOOD )
+			elseif	GetConVarNumber( "npcg_accuracy_dog" ) == 2 then
+				self.ent1:SetCurrentWeaponProficiency( WEAPON_PROFICIENCY_GOOD )
+			elseif	GetConVarNumber( "npcg_accuracy_dog" ) == 1 then
+				self.ent1:SetCurrentWeaponProficiency( WEAPON_PROFICIENCY_AVERAGE )
+			else
+				self.ent1:SetCurrentWeaponProficiency( WEAPON_PROFICIENCY_POOR )
+			end
 
-		if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
-			self.ent1:SetAngles( Angle( 0 , 0 , 0 ) ) 
-		else
-			self.ent1:SetAngles( Angle( 0 , math.random( 0 , 360 ) , 0 ) ) 
+			if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
+				self.ent1:SetAngles( Angle( 0 , 0 , 0 ) ) 
+			else
+				self.ent1:SetAngles( Angle( 0 , math.random( 0 , 360 ) , 0 ) ) 
 		end
 
 	end
+
+end
+
 end

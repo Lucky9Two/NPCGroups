@@ -11,26 +11,32 @@ ENT.Spawnable = false
 ENT.AdminOnly = false
 
 if SERVER then
+
 	function ENT:Initialize( )
 
+
 		local torsoDiceRoll = math.random( 1 , GetConVarNumber( "npcg_zombietorsochance" ) )
-		if torsoDiceRoll == 1 then self.torsoChance = 1 else self.torsoChance = 0	end
+
+		if torsoDiceRoll == 1 then self.torsoChance = 1 else self.torsoChance = 0 end
 		--print( "Zombie Torso Dice Roll is " .. torsoDiceRoll )
 		
-		if ConVarExists( "npcg_weapondrop" ) and GetConVarNumber( "npcg_weapondrop" ) != 0 then self.weaponNum = 8192 else self.weaponNum = 0	end
-		if ConVarExists( "npcg_ignorepushing" ) and GetConVarNumber( "npcg_ignorepushing" ) != 0 then self.pushNum = 16384 else self.pushNum = 0	end
-		if ConVarExists( "npcg_fade_corpse" ) and GetConVarNumber( "npcg_fade_corpse" ) != 0 then self.fadeNum = 512 else self.fadeNum = 0	end
-		if ConVarExists( "npcg_longvision" ) and GetConVarNumber( "npcg_longvision" ) != 0 then self.longNum = 256 else self.longNum = 0	end
+		if ConVarExists( "npcg_weapondrop" ) and GetConVarNumber( "npcg_weapondrop" ) != 0 then self.weaponNum = 8192 else self.weaponNum = 0 end
+		if ConVarExists( "npcg_ignorepushing" ) and GetConVarNumber( "npcg_ignorepushing" ) != 0 then self.pushNum = 16384 else self.pushNum = 0 end
+		if ConVarExists( "npcg_fade_corpse" ) and GetConVarNumber( "npcg_fade_corpse" ) != 0 then self.fadeNum = 512 else self.fadeNum = 0 end
+		if ConVarExists( "npcg_longvision" ) and GetConVarNumber( "npcg_longvision" ) != 0 then self.longNum = 256 else self.longNum = 0 end
 
 		self.kvNum = 0
 		
-		if self.torsoChance == 1	and	IsMounted( "ep2" ) then 
+		if self.torsoChance == 1 and IsMounted( "ep2" ) then
+
 			self.ent1 = ents.Create( "npc_fastzombie_torso" ) 
-			self.ent3 = ents.Create( "npc_fastzombie_torso" ) 
+			self.ent3 = ents.Create( "npc_fastzombie_torso" )
+
 		else 
 			self.ent1 = ents.Create( "npc_fastzombie" ) 
-			self.ent3 = ents.Create( "npc_fastzombie" ) 
-		end
+			self.ent3 = ents.Create( "npc_fastzombie" )
+
+	end
 		
 		self.ent1:SetPos( self:GetPos( ) )
 		self.ent1:SetHealth( GetConVarNumber( "npcg_healthoverride_zmb" ) )
@@ -67,29 +73,36 @@ if SERVER then
 		self.ent4:SetSchedule( SCHED_IDLE_WANDER )
 
 		if GetConVarNumber( "npcg_squad_zombie" ) > 0 then
+
 			self.ent1:SetKeyValue( "SquadName" , "Zombie" )
 			self.ent2:SetKeyValue( "SquadName" , "Zombie" )
 			self.ent3:SetKeyValue( "SquadName" , "Zombie" )
 			self.ent4:SetKeyValue( "SquadName" , "Zombie" )
+
 		end
 
-		if GetConVarNumber( "npcg_squad_wakeupall" ) != 0 then 
-			self.ent1:SetKeyValue( "wakesquad" , 1 ) 
+		if GetConVarNumber( "npcg_squad_wakeupall" ) != 0 then
+
+			self.ent1:SetKeyValue( "wakesquad" , 1 )
 			self.ent2:SetKeyValue( "wakesquad" , 1 ) 
 			self.ent3:SetKeyValue( "wakesquad" , 1 ) 
-			self.ent4:SetKeyValue( "wakesquad" , 1 ) 
+			self.ent4:SetKeyValue( "wakesquad" , 1 )
+
 		end
-		
+
 		if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
-			self.ent1:SetAngles( Angle( 0 , 0 , 0 ) ) 
-			self.ent2:SetAngles( Angle( 0 , 0 , 0 ) ) 
+
+			self.ent1:SetAngles( Angle( 0 , 0 , 0 ) )
+			self.ent2:SetAngles( Angle( 0 , 0 , 0 ) )
 			self.ent3:SetAngles( Angle( 0 , 0 , 0 ) ) 
-			self.ent4:SetAngles( Angle( 0 , 0 , 0 ) ) 
+			self.ent4:SetAngles( Angle( 0 , 0 , 0 ) )
+
 		else
-			self.ent1:SetAngles( Angle( 0 , math.random( 0 , 360 ) , 0 ) ) 
-			self.ent2:SetAngles( Angle( 0 , math.random( 0 , 360 ) , 0 ) ) 
+			self.ent1:SetAngles( Angle( 0 , math.random( 0 , 360 ) , 0 ) )
+			self.ent2:SetAngles( Angle( 0 , math.random( 0 , 360 ) , 0 ) )
 			self.ent3:SetAngles( Angle( 0 , math.random( 0 , 360 ) , 0 ) ) 
-			self.ent4:SetAngles( Angle( 0 , math.random( 0 , 360 ) , 0 ) ) 
+			self.ent4:SetAngles( Angle( 0 , math.random( 0 , 360 ) , 0 ) )
+
 		end
 
 		timer.Simple( 0 , function( )
@@ -102,6 +115,9 @@ if SERVER then
 				undo.SetPlayer( self.Owner)
 			undo.Finish( )
 			self:Remove( )
-		end)
+
+		end )
+
 	end
+
 end

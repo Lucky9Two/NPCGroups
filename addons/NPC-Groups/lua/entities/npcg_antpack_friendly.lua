@@ -20,15 +20,17 @@ ENT.Spawnable = false
 ENT.AdminOnly = true
 
 if SERVER then
+
 	function ENT:Initialize( )
 
-		if ConVarExists( "npcg_ignorepushing" ) and GetConVarNumber( "npcg_ignorepushing" ) != 0 then self.pushNum = 16384 else self.pushNum = 0	end
-		if ConVarExists( "npcg_fade_corpse" ) and GetConVarNumber( "npcg_fade_corpse" ) != 0 then self.fadeNum = 512 else self.fadeNum = 0	end
-		if ConVarExists( "npcg_longvision" ) and GetConVarNumber( "npcg_longvision" ) != 0 then self.longNum = 256 else self.longNum = 0	end
-		if ConVarExists( "npcg_antlion_eludeburrow" ) and GetConVarNumber( "npcg_antlion_eludeburrow" ) != 0 then self.eludeBurrowNum = 65536 else self.eludeBurrowNum = 0	end
-		if ConVarExists( "npcg_antlion_startburrow" ) then self.startBurrow = GetConVarNumber( "npcg_antlion_startburrow" ) else self.startBurrow = 0	end
-		if ConVarExists( "npcg_wakeradius_antlion" ) then self.wakeRadius = GetConVarNumber( "npcg_wakeradius_antlion" ) else self.wakeRadius = 512	end
-		if ConVarExists( "npcg_antlion_alertrange" ) then self.alertRange = GetConVarNumber( "npcg_antlion_alertrange" ) else self.alertRange = 512	end
+
+		if ConVarExists( "npcg_ignorepushing" ) and GetConVarNumber( "npcg_ignorepushing" ) != 0 then self.pushNum = 16384 else self.pushNum = 0 end
+		if ConVarExists( "npcg_fade_corpse" ) and GetConVarNumber( "npcg_fade_corpse" ) != 0 then self.fadeNum = 512 else self.fadeNum = 0 end
+		if ConVarExists( "npcg_longvision" ) and GetConVarNumber( "npcg_longvision" ) != 0 then self.longNum = 256 else self.longNum = 0 end
+		if ConVarExists( "npcg_antlion_eludeburrow" ) and GetConVarNumber( "npcg_antlion_eludeburrow" ) != 0 then self.eludeBurrowNum = 65536 else self.eludeBurrowNum = 0 end
+		if ConVarExists( "npcg_antlion_startburrow" ) then self.startBurrow = GetConVarNumber( "npcg_antlion_startburrow" ) else self.startBurrow = 0 end
+		if ConVarExists( "npcg_wakeradius_antlion" ) then self.wakeRadius = GetConVarNumber( "npcg_wakeradius_antlion" ) else self.wakeRadius = 512 end
+		if ConVarExists( "npcg_antlion_alertrange" ) then self.alertRange = GetConVarNumber( "npcg_antlion_alertrange" ) else self.alertRange = 512 end
 		self.kvNum = 0
 		
 		self.ent1 = ents.Create( "npc_antlion" )
@@ -76,6 +78,7 @@ if SERVER then
 		self.ent4:SetSchedule( SCHED_IDLE_WANDER )
 		
 		if IsMounted( "ep2" ) and GetConVarNumber( "npcg_squaddies_worker" ) != 0 then
+
 			self.ent5 = ents.Create( "npc_antlion_worker" ) 
 			self.ent5:SetPos( self:GetPos( ) + self:GetForward( ) * 100 + self:GetRight( ) * -100 )
 			self.ent5:SetKeyValue( "spawnflags" , tostring( self.kvNum + self.longNum + self.pushNum + self.fadeNum + self.eludeBurrowNum ) )
@@ -85,6 +88,7 @@ if SERVER then
 			self.ent5:Spawn( )
 			self.ent5:Activate( )
 			self.ent5:SetSchedule( SCHED_IDLE_WANDER )
+
 		else
 			self.ent5 = ents.Create( "npc_antlion" ) 	
 			self.ent5:SetPos( self:GetPos( ) + self:GetForward( ) * 100 + self:GetRight( ) * -100 )
@@ -96,56 +100,64 @@ if SERVER then
 			self.ent5:Spawn( )
 			self.ent5:Activate( )
 			self.ent5:SetSchedule( SCHED_IDLE_WANDER )
+
 		end
 
 		if GetConVarNumber( "npcg_squad_antlion" ) != 0 then
+
 			self.ent1:SetKeyValue( "SquadName" , "Antlion" )
 			self.ent2:SetKeyValue( "SquadName" , "Antlion" )
 			self.ent3:SetKeyValue( "SquadName" , "Antlion" )
 			self.ent4:SetKeyValue( "SquadName" , "Antlion" )
 			self.ent5:SetKeyValue( "SquadName" , "Antlion" )
+
 		end
 
-		if GetConVarNumber( "npcg_squad_wakeupall" ) != 0 then 
-			self.ent1:SetKeyValue( "wakesquad" , 1 ) 
+		if GetConVarNumber( "npcg_squad_wakeupall" ) != 0 then
+
+			self.ent1:SetKeyValue( "wakesquad" , 1 )
 			self.ent2:SetKeyValue( "wakesquad" , 1 ) 
 			self.ent3:SetKeyValue( "wakesquad" , 1 ) 
 			self.ent4:SetKeyValue( "wakesquad" , 1 ) 
-			self.ent5:SetKeyValue( "wakesquad" , 1 ) 
-		end
+			self.ent5:SetKeyValue( "wakesquad" , 1 )
+
+	end
 
 		self.ent1:AddRelationship( "player D_LI 200" )
 		self.ent1:AddRelationship( "npc_citizen D_LI 200" )
 		self.ent1:AddRelationship( "npc_vortigaunt D_LI 200" )
 		
-		self.ent2:AddRelationship( "player D_LI 200" )
-		self.ent2:AddRelationship( "npc_citizen D_LI 200" )
-		self.ent2:AddRelationship( "npc_vortigaunt D_LI 200" )
+		self.ent1:AddRelationship( "player D_LI 200" )
+		self.ent1:AddRelationship( "npc_citizen D_LI 200" )
+		self.ent1:AddRelationship( "npc_vortigaunt D_LI 200" )
 		
 		self.ent3:AddRelationship( "player D_LI 200" )
-		self.ent3:AddRelationship( "npc_citizen D_LI 200" )
-		self.ent3:AddRelationship( "npc_vortigaunt D_LI 200" )
+		self.ent1:AddRelationship( "npc_citizen D_LI 200" )
+		self.ent1:AddRelationship( "npc_vortigaunt D_LI 200" )
 		
 		self.ent4:AddRelationship( "player D_LI 200" )
-		self.ent4:AddRelationship( "npc_citizen D_LI 200" )
-		self.ent4:AddRelationship( "npc_vortigaunt D_LI 200" )
+		self.ent1:AddRelationship( "npc_citizen D_LI 200" )
+		self.ent1:AddRelationship( "npc_vortigaunt D_LI 200" )
 		
 		self.ent5:AddRelationship( "player D_LI 200" )
 		self.ent5:AddRelationship( "npc_citizen D_LI 200" )
 		self.ent5:AddRelationship( "npc_vortigaunt D_LI 200" )
 
 		if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
-			self.ent1:SetAngles( Angle( 0 , 0 , 0 ) ) 
-			self.ent2:SetAngles( Angle( 0 , 0 , 0 ) ) 
+
+			self.ent1:SetAngles( Angle( 0 , 0 , 0 ) )
+			self.ent2:SetAngles( Angle( 0 , 0 , 0 ) )
 			self.ent3:SetAngles( Angle( 0 , 0 , 0 ) ) 
 			self.ent4:SetAngles( Angle( 0 , 0 , 0 ) ) 
-			self.ent5:SetAngles( Angle( 0 , 0 , 0 ) ) 
+			self.ent5:SetAngles( Angle( 0 , 0 , 0 ) )
+
 		else
-			self.ent1:SetAngles( Angle( 0 , math.random( 0 , 360 ) , 0 ) ) 
-			self.ent2:SetAngles( Angle( 0 , math.random( 0 , 360 ) , 0 ) ) 
+			self.ent1:SetAngles( Angle( 0 , math.random( 0 , 360 ) , 0 ) )
+			self.ent2:SetAngles( Angle( 0 , math.random( 0 , 360 ) , 0 ) )
 			self.ent3:SetAngles( Angle( 0 , math.random( 0 , 360 ) , 0 ) ) 
 			self.ent4:SetAngles( Angle( 0 , math.random( 0 , 360 ) , 0 ) ) 
-			self.ent5:SetAngles( Angle( 0 , math.random( 0 , 360 ) , 0 ) ) 
+			self.ent5:SetAngles( Angle( 0 , math.random( 0 , 360 ) , 0 ) )
+
 		end
 
 		timer.Simple( 0 , function( )
@@ -159,6 +171,9 @@ if SERVER then
 				undo.SetPlayer( self.Owner)
 			undo.Finish( )
 			self:Remove( )
-		end)
+
+		end )
+
 	end
+
 end

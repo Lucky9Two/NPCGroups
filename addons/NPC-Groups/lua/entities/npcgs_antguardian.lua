@@ -9,8 +9,8 @@ if not ConVarExists( "npcg_antlion_cavern" ) then CreateConVar(	"npcg_antlion_ca
 if not ConVarExists( "npcg_randomizer_antlion" ) then CreateConVar(	"npcg_randomizer_antlion" , "1" , { FCVAR_REPLICATED , FCVAR_ARCHIVE } ) end
 if not ConVarExists( "npcg_wakeradius_antlion" ) then CreateConVar(	"npcg_wakeradius_antlion" , "500" , { FCVAR_REPLICATED , FCVAR_ARCHIVE } ) end
 if not ConVarExists( "npcg_squad_antlion" ) then CreateConVar(	"npcg_squad_antlion" , 				"1" , { FCVAR_REPLICATED , FCVAR_ARCHIVE } ) end
-if not ConVarExists( "npcg_healthoverride_antlion" ) then CreateConVar(	"npcg_healthoverride_antlion" ,  	"125" , { FCVAR_REPLICATED , FCVAR_ARCHIVE } ) end
-if not ConVarExists( "npcg_healthvariant_antlion" ) then CreateConVar(	"npcg_healthvariant_antlion" ,  	"0" , { FCVAR_REPLICATED , FCVAR_ARCHIVE } ) end
+if not ConVarExists( "npcg_healthoverride_antlion" ) then CreateConVar(	"npcg_healthoverride_antlion" , 	"125" , { FCVAR_REPLICATED , FCVAR_ARCHIVE } ) end
+if not ConVarExists( "npcg_healthvariant_antlion" ) then CreateConVar(	"npcg_healthvariant_antlion" , 	"0" , { FCVAR_REPLICATED , FCVAR_ARCHIVE } ) end
 
 ENT.Type = "anim"
 ENT.Base = "base_anim"
@@ -22,16 +22,18 @@ ENT.Spawnable = false
 ENT.AdminOnly = false
 
 if SERVER then
+
 	function ENT:Initialize( )
 
-		if ConVarExists( "npcg_weapondrop" ) and GetConVarNumber( "npcg_weapondrop" ) != 0 then self.weaponNum = 8192 else self.weaponNum = 0	end
-		if GetConVarNumber( "npcg_ignorepushing" ) != 0 then self.pushNum = 16384 else self.pushNum = 0	end
-		if GetConVarNumber( "npcg_fade_corpse" ) != 0 then self.fadeNum = 512 else self.fadeNum = 0	end
-		if GetConVarNumber( "npcg_longvision" ) != 0 then self.longNum = 256 else self.longNum = 0	end
-		if GetConVarNumber( "npcg_antlion_eludeburrow" ) != 0 then self.eludeBurrowNum = 65536 else self.eludeBurrowNum = 0	end
-		if ConVarExists( "npcg_antlion_startburrow" ) then self.startBurrow = GetConVarNumber( "npcg_antlion_startburrow" ) else self.startBurrow = 0	end
-		if ConVarExists( "npcg_wakeradius_antlion" ) then self.wakeRadius = GetConVarNumber( "npcg_wakeradius_antlion" ) else self.wakeRadius = 512	end
-		if ConVarExists( "npcg_antlion_alertrange" ) then self.alertRange = GetConVarNumber( "npcg_antlion_alertrange" ) else self.alertRange = 512	end
+
+		if ConVarExists( "npcg_weapondrop" ) and GetConVarNumber( "npcg_weapondrop" ) != 0 then self.weaponNum = 8192 else self.weaponNum = 0 end
+		if GetConVarNumber( "npcg_ignorepushing" ) != 0 then self.pushNum = 16384 else self.pushNum = 0 end
+		if GetConVarNumber( "npcg_fade_corpse" ) != 0 then self.fadeNum = 512 else self.fadeNum = 0 end
+		if GetConVarNumber( "npcg_longvision" ) != 0 then self.longNum = 256 else self.longNum = 0 end
+		if GetConVarNumber( "npcg_antlion_eludeburrow" ) != 0 then self.eludeBurrowNum = 65536 else self.eludeBurrowNum = 0 end
+		if ConVarExists( "npcg_antlion_startburrow" ) then self.startBurrow = GetConVarNumber( "npcg_antlion_startburrow" ) else self.startBurrow = 0 end
+		if ConVarExists( "npcg_wakeradius_antlion" ) then self.wakeRadius = GetConVarNumber( "npcg_wakeradius_antlion" ) else self.wakeRadius = 512 end
+		if ConVarExists( "npcg_antlion_alertrange" ) then self.alertRange = GetConVarNumber( "npcg_antlion_alertrange" ) else self.alertRange = 512 end
 		
 		self.kvNum = 0
 		
@@ -48,17 +50,24 @@ if SERVER then
 		self.ent1:SetSchedule( SCHED_IDLE_WANDER )
 
 		if GetConVarNumber( "npcg_squad_antlion" ) != 0 then
+
 			self.ent1:SetKeyValue( "SquadName" , "Antlion" )
-		end
-		
-		if GetConVarNumber( "npcg_squad_wakeupall" ) != 0 then 
-			self.ent1:SetKeyValue( "wakesquad" , 1 ) 
+
 		end
 
+		if GetConVarNumber( "npcg_squad_wakeupall" ) != 0 then
+
+			self.ent1:SetKeyValue( "wakesquad" , 1 )
+
+	end
+
 		if ConVarExists( "npcg_randomyaw" ) and GetConVarNumber( "npcg_randomyaw" ) == 0 then
-			self.ent1:SetAngles( Angle( 0 , 0 , 0 ) ) 
+
+			self.ent1:SetAngles( Angle( 0 , 0 , 0 ) )
+
 		else
-			self.ent1:SetAngles( Angle( 0 , math.random( 0 , 360 ) , 0 ) ) 
+			self.ent1:SetAngles( Angle( 0 , math.random( 0 , 360 ) , 0 ) )
+
 		end
 
 		timer.Simple( 0 , function( )
@@ -68,6 +77,9 @@ if SERVER then
 				undo.SetPlayer( self.Owner)
 			undo.Finish( )
 			self:Remove( )
-		end)
+
+		end )
+
 	end
+
 end

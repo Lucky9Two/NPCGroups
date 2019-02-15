@@ -335,23 +335,23 @@ local function NPCGroupsSpawn( _P , NPC )
 	if NPC == ( "npcg_cstm_cmbft" or "npcg_cstm_cmbft_spawn" ) and not file.Exists( ( GetConVarString( "npcg_custom_model_combine" ) ) , "GAME" ) then
 		_P:ChatPrint( "Non-existent model!\nProper usage:\n npcg_custom_model_combine \"models/combine_super_soldier.mdl\"" ) 
 		return false
-	end
+end
 	if NPC == ( "npcg_cstm_rebft" or "npcg_cstm_rebft_spawn" ) and !file.Exists( ( GetConVarString( "npcg_custom_model_rebel" ) ) , "GAME" ) then
 		_P:ChatPrint( "Non-existent model!\nProper usage:\n npcg_custom_model_rebel \"models/humans/group03/male01.mdl\"" ) 
 		return false
-	end
+end
 	if NPC == ( "npcg_cstm_civilian" or "npcg_cstm_civilian_spawn" or "npcgs_cstm_civilian" or "npcgs_cstm_civilian_spawn" ) and !file.Exists( ( GetConVarString( "npcg_custom_model_citizen" ) ) , "GAME" ) then
 		_P:ChatPrint( "Non-existent model!\nProper usage:\n npcg_custom_model_citizen \"models/humans/group01/male01.mdl\"" ) 
 		return false
-	end
+end
 	-- if NPC == ( "npcg_cstm_cpft" or "npcg_cstm_cpft_spawn" ) and !file.Exists( ( GetConVarString( "npcg_custom_model_cp" ) ) , "GAME" ) then
 		-- _P:ChatPrint( "Non-existent model!\nProper usage:\n npcg_custom_model_cp \"models/police.mdl\"" ) 
 		-- return false
-	--	end
+	-- end
 
 end
 hook.Add( "PlayerSpawnNPC" , "NPCGroupsSpawn" , NPCGroupsSpawn ) 
-local function NPCGroupsSpawned( _P , NPC ) NPC.Owner = _P	end
+local function NPCGroupsSpawned( _P , NPC ) NPC.Owner = _P end
 hook.Add( "PlayerSpawnedNPC" , "NPCGroupsSpawned" , NPCGroupsSpawned ) 
 -------------------------------------------------------
 -------------------------------------------------------
@@ -463,15 +463,15 @@ local Category = "NPCG: Antlions"
 -------------------------------------------------------
 -------------------------------------------------------
 -------------------------------------------------------
-list.Set( "NPC" , "npcg_antpack_friendly" , { ["Name"] = "Friendly Antlions" , ["Class"] = "npcg_antpack_friendly" , ["Category"] = Category } ) 
-list.Set( "NPC" , "npcg_antguard" , { ["Name"] = "Antlion Guard Cohort" , ["Class"] = "npcg_antguard" , ["Category"] = Category } ) 
+list.Set( "NPC" , "npcg_antpack_friendly" , { ["Name"] = "Antlion Pack" , ["Class"] = "npcg_antpack_friendly" , ["Category"] = Category } ) 
+list.Set( "NPC" , "npcg_antguard" , { ["Name"] = "Guard Cohort" , ["Class"] = "npcg_antguard" , ["Category"] = Category } ) 
 list.Set( "NPC" , "npcg_antguardian" , { ["Name"] = "Cavern Guard" , ["Class"] = "npcg_antguardian" , ["Category"] = Category } ) 
 list.Set( "NPC" , "npcg_antpack" , { ["Name"] = "Antlion Pack" , ["Class"] = "npcg_antpack" , ["Category"] = Category } ) 
 list.Set( "NPC" , "npcg_antswarm" , { ["Name"] = "Antlion Swarm" , ["Class"] = "npcg_antswarm" , ["Category"] = Category } ) 
 list.Set( "NPC" , "npcgs_antlion" , { ["Name"] = "Antlion Soldier" , ["Class"] = "npcgs_antlion" , ["Category"] = Category } ) 
 list.Set( "NPC" , "npcgs_antworker" , { ["Name"] = "Antlion Worker" , ["Class"] = "npcgs_antworker" , ["Category"] = Category } ) 
 list.Set( "NPC" , "npcgs_antguard" , { ["Name"] = "Antlion Guard" , ["Class"] = "npcgs_antguard" , ["Category"] = Category } ) 
-list.Set( "NPC" , "npcgs_antguardian" , { ["Name"] = "Antlion Guardian" , ["Class"] = "npcgs_antguardian" , ["Category"] = Category } ) 
+list.Set( "NPC" , "npcgs_antguardian" , { ["Name"] = "Guardian Cohort" , ["Class"] = "npcgs_antguardian" , ["Category"] = Category } ) 
 -------------------------------------------------------
 -------------------------------------------------------
 -------------------------------------------------------
